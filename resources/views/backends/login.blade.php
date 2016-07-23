@@ -37,6 +37,19 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
+			@if (count($errors) > 0)
+				<!-- Form Error List -->
+				<div class="panel panel-danger" style="position: fixed; top: 10px;">
+					<div class="panel-heading">
+						<strong>Whoops! Something went wrong!</strong>
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+				</div>
+			@endif
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title text-center">G2Shopping Login</h3>
@@ -45,7 +58,7 @@
 					<form role="form" method="POST" action="{{url('admin/login')}}">
 						{{ csrf_field() }}
 						<div class="form-group">
-							<input class="form-control" placeholder="E-mail" name="email" type="email" required autofocus>
+							<input class="form-control" placeholder="E-mail" name="email" type="email" value="{{old('email')}}" required autofocus>
 						</div>
 						<div class="form-group">
 							<input class="form-control" placeholder="Password" name="password" type="password" value="" required>
