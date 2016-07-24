@@ -1,3 +1,6 @@
+<?php
+$user = \Illuminate\Support\Facades\Session::get('logged_in');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -245,7 +248,7 @@
             <!-- /.dropdown -->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> Narith <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-user fa-fw"></i> {{$user['password']}} <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="{{url('admin/profile')}}"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -253,7 +256,7 @@
                     {{--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>--}}
                     <li class="divider"></li>
-                    <li><a href="{{url('admin/login')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="{{url('admin/logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->

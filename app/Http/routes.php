@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use Illuminate\Support\Facades\Session;
 
 Route::get('/', function () {
     return view('frontends.index');
@@ -18,6 +19,16 @@ Route::get('/', function () {
 Route::get('{url}', 'FrontendController@checkUrl');
 
 Route::group(['prefix' => 'admin'], function () {
+
+    Route::get('login', function () {
+        return view('backends/login');
+    });
+    Route::get('logout', function () {
+        Session::forget('logged_in');
+        //Session::flush();
+        return redirect('admin/login');
+    });
+
     Route::get('{url}', 'BackendController@checkUrl');
 
     Route::post('login', 'ModelBackendController@doLogin');

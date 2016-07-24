@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class ModelBackendController extends Controller
 {
@@ -24,8 +23,14 @@ class ModelBackendController extends Controller
         );
         if(Auth::attempt($userdata)){
             $request->session()->put('logged_in', $userdata);
-            print_r($userdata);
-            //return redirect('admin/dashboard');
+            /*if($request->session()->has('logged_in')){
+                //print_r($userdata);
+                //$data = $request->session()->get('logged_in');
+                //echo $data['email'];
+                return redirect('admin/dashboard');
+            }else
+                echo 'Seession not set.';*/
+            return redirect('admin/dashboard');
         }else{
             echo "<script>alert('Username/Password incorrect'); history.back();</script>";
         }

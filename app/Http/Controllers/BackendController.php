@@ -9,7 +9,11 @@ use App\Http\Requests;
 class BackendController extends Controller
 {
 
-    public function checkUrl($url){
+    public function checkUrl(Request $request, $url){
+        if(!$request->session()->has('logged_in')){
+            //print_r(Session::get('logged_in'));
+            return redirect('admin/login');
+        }
         switch($url){
             case 'administration':
                 return view('backends/administration');
@@ -22,9 +26,6 @@ class BackendController extends Controller
                 break;
             case 'customer':
                 return view('backends/customer');
-                break;
-            case 'login':
-                return view('backends/login');
                 break;
             case 'order':
                 return view('backends/order');
