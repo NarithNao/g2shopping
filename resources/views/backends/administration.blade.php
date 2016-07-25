@@ -28,12 +28,12 @@
     <div class="row" id="administration">
         <div class="well">
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#user_information">User Role</a></li>
-                <li><a data-toggle="tab" href="#user_login_information">User List</a></li>
+                <li class="active"><a data-toggle="tab" href="#user_role">User Role</a></li>
+                <li><a data-toggle="tab" href="#user_list">User List</a></li>
             </ul>
 
             <div class="tab-content bg">
-                <div id="user_information" class="tab-pane fade in active">
+                <div id="user_role" class="tab-pane fade in active">
                     <div class="table-responsive" style="padding: 20px 0;">
                         <table class="table table-bordered">
                             <thead>
@@ -51,17 +51,21 @@
                                     <td class="col-xs-2 col-sm-2 text-center">{{$i++}}</td>
                                     <td class="col-xs-3 col-sm-4">{{$data->role}}</td>
                                     <td class="col-xs-2 col-sm-2">
-                                        <a href="#" class="btn btn-xs center-block" data-toggle="tooltip" title="active">
-                                            @if($data->status == 1)
+
+                                        @if($data->status == 1)
+                                            <a href="#" class="btn btn-xs center-block" data-toggle="tooltip" title="Active">
                                                 <span class="glyphicon glyphicon-ok-circle"></span>
-                                            @else
+                                            </a>
+                                        @else
+                                            <a href="#" class="btn btn-xs center-block" data-toggle="tooltip" title="Inactive">
                                                 <span class="glyphicon glyphicon-remove-circle"></span>
-                                            @endif
-                                        </a>
+                                            </a>
+                                        @endif
+
                                     </td>
                                     <td class="col-xs-5 col-sm-4">
-                                        <a href="#{{--{{url('admin/user_role/'.$data->id.'/edit')}}--}}" id="btn_update_user_role" class="btn btn-warning btn-xs col-xs-5 col-xs-offset-1" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>
-                                        <a href="#{{--{{url('admin/user_role/'.$data->id.'/delete')}}--}}" id="btn_delete_user_role" class="btn btn-danger btn-xs col-xs-5 col-xs-offset-1" data-toggle="tooltip" title="Delete"><i class="fa fa-times"></i></a>
+                                        <a href="#" id="btn_update_user_role" class="btn btn-warning btn-xs col-xs-5 col-xs-offset-1" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>
+                                        <a href="#" id="btn_delete_user_role" class="btn btn-danger btn-xs col-xs-5 col-xs-offset-1" data-toggle="tooltip" title="Delete"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -69,30 +73,37 @@
                         </table>
                     </div>
                 </div>
-                <div id="user_login_information" class="tab-pane fade">
-                    <form class="form-horizontal" role="form" style="padding: 20px;">
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="user_role">User Role:</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" id="user_role">
-                                    <option value="1">Admin</option>
-                                    <option value="2">Guest</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="email">Email:</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="password">Password:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="password" name="password" placeholder="Enter password">
-                            </div>
-                        </div>
-                    </form>
+                <div id="user_list" class="tab-pane fade">
+                    <div class="table-responsive" style="padding: 20px 0;">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Role</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Created on</th>
+                                <th class="text-center">Last Activity</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="col-sm-1 col-xs-1">
+                                        <a href="#" id="btn_update_user_role" class="btn btn-warning btn-xs col-xs-12" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,6 +162,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="control-label col-sm-3 col-xs-6" for="u_status">Status:</label>
+                    <div class="col-sm-9 col-xs-6">
+                        <input type="checkbox" name="u_status" id="u_status" value='0'>
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="col-sm-12">
                         <input type="submit" class="btn btn-primary center-block" value="Update">
                     </div>
@@ -182,83 +199,50 @@
         </div>
     {{-- end delete user role --}}
 
+    {{-- add User --}}
+    <div class="row" id="l-add_user" style="display: none;">
+        <div class="well" {{--style="position: fixed;"--}}>
+            <div class="page-header text-center text-info" style="margin-top: -20px;">
+                <h3>Add User</h3>
+            </div>
+            <form class="form-horizontal" role="form" method="POST" action="{{url('admin/add_user')}}" style="padding: 20px 0;">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="a_user">User role:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="a_user" name="a_user" placeholder="Enter User Role">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="a_user_username">Username:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="a_user_username" name="a_user_username" placeholder="Enter username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="a_user_email">Email:</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="a_user_email" name="a_user_email" placeholder="Enter email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="submit" class="btn btn-primary center-block" value="Save">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{-- end add user --}}
+
 @endsection
 
 @section('js')
+    <script src="{{asset('backend/js/pages/administration.js')}}"></script>
     <script>
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip();
-
-            var t_user_role = '';
-
-            $("#b-add_user_role").click(function () {
-                $("#administration").hide();
-                $("#b-add_user_role").hide();
-                $("#b-add_user").addClass("pull-right");
-                $("#b-add_user").text("Cancel");
-                $("#l-add_user_role").show();
-                t_user_role = $("#b-add_user").text();
-                $("#user_role").focus();
-            });
-
-            $("#b-add_user").click(function () {
-                if(t_user_role == "Cancel"){
-                    $("#l-delete_user_role").hide();
-                    $("#l-edit_user_role").hide();
-                    $("#l-add_user_role").hide();
-                    $("#b-add_user").text("Add User");
-                    $("#b-add_user").removeClass("pull-right");
-                    $("#administration").show();
-                    $("#b-add_user_role").show();
-                }
-            });
-
-            $("#btn_update_user_role").click(function () {
-                url = $("#url").val()+'/user_role/'+$("#user_role_id").val()+'/search';
-                //alert(url);
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(result){
-                        console.log(result);
-                        $("#administration").hide();
-                        $("#b-add_user_role").hide();
-                        $("#b-add_user").addClass("pull-right");
-                        $("#b-add_user").text("Cancel");
-                        $("#l-edit_user_role").show();
-                        t_user_role = $("#b-add_user").text();
-                        $("#user_role").focus();
-
-                        $("#u_user_role_id").val(result.id);
-                        $("#u_user_role").val(result.role);
-                        $("#u_description").val(result.description);
-                        $("#type").text(result.role);
-                }});
-            });
-
-            $("#btn_delete_user_role").click(function () {
-                url = $("#url").val()+'/user_role/'+$("#user_role_id").val()+'/search';
-
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(result){
-                        console.log(result);
-                        $("#administration").hide();
-                        $("#b-add_user_role").hide();
-                        $("#b-add_user").addClass("pull-right");
-                        $("#b-add_user").text("Cancel");
-                        $("#l-delete_user_role").show();
-                        t_user_role = $("#b-add_user").text();
-                        $("#d_user_role_id").val(result.id);
-                    }});
-            });
-
         });
-
-
     </script>
 
 @endsection

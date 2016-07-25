@@ -56,6 +56,10 @@ class ModelBackendController extends Controller
         $data = $userType->find($request->u_user_role_id);
         $data->role = $request->u_user_role;
         $data->description = $request->u_description;
+        if ($request->u_status == 1)
+            $data->status = 1;
+        else
+            $data->status = 0;
         $data->save();
         return back();
     }
