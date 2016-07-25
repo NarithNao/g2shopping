@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\UserType;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -10,22 +11,23 @@ class BackendController extends Controller
 {
 
     public function checkUrl(Request $request, $url){
-        if(!$request->session()->has('logged_in')){
+        /*if(!$request->session()->has('logged_in')){
             //print_r(Session::get('logged_in'));
             return redirect('admin/login');
-        }
+        }*/
         switch($url){
+            /* Administration menu */
             case 'administration':
-                return view('backends/administration');
+                $datas = UserType::all();
+                $i = 1;
+                return view('backends/administration', compact('datas', 'i'));
                 break;
+            /*  */
             case 'cart':
                 return view('backends/cart');
                 break;
             case 'category':
                 return view('backends/category');
-                break;
-            case 'customer':
-                return view('backends/customer');
                 break;
             case 'order':
                 return view('backends/order');

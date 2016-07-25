@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\UserType;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -35,6 +36,34 @@ class ModelBackendController extends Controller
             echo "<script>alert('Username/Password incorrect'); history.back();</script>";
         }
 
+    }
+
+    public function addUserRole(Request $request, UserType $userType){
+        $data = array(
+            'role' => $request->a_user_role,
+            'description' => $request->a_description
+        );
+        $userType->create($data);
+        return back();
+    }
+
+    public function searchUserRole($id, UserType $userType){
+        $datas = $userType->find($id);
+        return $datas;
+    }
+
+    public function updateUserRole(Request $request, UserType $userType){
+        $data = $userType->find($request->u_user_role_id);
+        $data->role = $request->u_user_role;
+        $data->description = $request->u_description;
+        $data->save();
+        return back();
+    }
+
+    public function deleteUserRole(Request $request, UserType $userType){
+        $data = $userType->find($request->d_user_role_id);
+        $data->delete();
+        return back();
     }
 
 }

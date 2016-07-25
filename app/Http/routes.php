@@ -32,4 +32,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('{url}', 'BackendController@checkUrl');
 
     Route::post('login', 'ModelBackendController@doLogin');
+    Route::post('add_user_role', 'ModelBackendController@addUserRole');
+    Route::get('user_role/{id}/search', 'ModelBackendController@searchUserRole');
+    Route::post('update_user_role', 'ModelBackendController@updateUserRole');
+    Route::post('delete_user_role', 'ModelBackendController@deleteUserRole');
 });

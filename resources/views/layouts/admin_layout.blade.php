@@ -359,16 +359,7 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
                         </ul>
                     </li>
                     <li>
-                        <a href="{{url('admin/administration')}}"><i class="fa fa-user-secret fa-fw"></i> Administration<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{url('admin/user_role')}}">Users Roles</a>
-                            </li>
-                            <li>
-                                <a href="{{url('admin/customer')}}">Users</a>
-                            </li>
-
-                        </ul>
+                        <a href="{{url('admin/administration')}}"><i class="fa fa-user-secret fa-fw"></i> Administration</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Setting<span class="fa arrow"></span></a>
