@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ddbd339-60ca-4cc6-bccf-a563db89d7e0" name="Default" comment="commit">
-      <change type="DELETED" beforePath="D:\Study\CMU\Y4 S2\IS 440\g2shopping\public\backend\js\pages\signup.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ModelBackendController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ModelBackendController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backends/administration.blade.php" afterPath="$PROJECT_DIR$/resources/views/backends/administration.blade.php" />
+    <list default="true" id="4ddbd339-60ca-4cc6-bccf-a563db89d7e0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\Study\CMU\Y4 S2\IS 440\g2shopping\public\backend\js\pages\login.js" afterPath="$PROJECT_DIR$/public/backend/js/pages/administration.js" />
     </list>
     <ignored path="ecom.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -542,7 +538,13 @@
       <option name="project" value="LOCAL" />
       <updated>1469408436412</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="commit">
+      <created>1469412039437</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1469412039437</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
