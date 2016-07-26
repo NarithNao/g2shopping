@@ -3,6 +3,8 @@
  */
 $(document).ready(function () {
 
+    var btn_title = '';
+
     $("#b-add_user_role").click(function (e) {
         e.preventDefault();
         $("#administration").hide();
@@ -11,6 +13,7 @@ $(document).ready(function () {
         $("#b-cancel").removeClass("hidden");
         $("#l-add_user_role").show();
         $("#a_user_role").focus();
+        btn_title ='user_role';
     });
 
     $(".btn_update_user_role").click(function (e) {
@@ -40,6 +43,12 @@ $(document).ready(function () {
                     $("#u_status").prop('checked', true);
                     $("#u_status").val('1');
                 }
+                /*if(btn_title == 'user_role'){
+                    $("#tab-user").hasClass('active')?$("#tab-user").removeClass('active') : '';
+                    $("#user_list").hasClass('in active')? $("#user_list").removeClass('in active'):'';
+                    $("#tab-user_role").hasClass('active')? '':$("#tab-user_role").addClass('active') ;
+                    $("#user_role").hasClass('in active')? '':$("#user_role").addClass('in active');
+                }*/
             }});
     });
 
@@ -81,6 +90,7 @@ $(document).ready(function () {
         $("#b-cancel").removeClass("hidden");
         $("#l-add_user").show();
         $("#a_user_user_role").focus();
+        btn_title ='user';
         $("#a_user_newsletter").val('0');
     });
 
@@ -96,7 +106,7 @@ $(document).ready(function () {
             url: url,
             type: 'GET',
             dataType: 'json',
-            success: function(result){
+            success: function (result) {
                 //console.log(result);
                 $("#administration").hide();
                 $("#b-add_user_role").hide();
@@ -107,7 +117,7 @@ $(document).ready(function () {
                 $("#a_user_newsletter").val('0');
 
                 $("#u_user_id").val(result.id);
-                if(result.user_type_id == 1)
+                if (result.user_type_id == 1)
                     $("#u_user_user_role").val('Admin');
                 else
                     $("#u_user_user_role").val('Guest');
@@ -119,18 +129,26 @@ $(document).ready(function () {
                 $("#u_user_city").val(result.city);
                 $("#u_user_address").val(result.address);
                 $("#u_user_phone").val(result.phone);
-                if(result.newsletter == 1){
+                if (result.newsletter == 1) {
                     $("#u_user_newsletter").prop('checked', true);
                     $("#u_user_newsletter").val('1');
-                }else
+                } else
                     $("#u_user_newsletter").val('1');
-                if(result.status == 1){
+                if (result.status == 1) {
                     $("#u_user_status").prop('checked', true);
                     $("#u_user_status").val('1');
-                }else
+                } else
                     $("#u_user_status").val('1');
-                }
-            });
+
+                /*if(btn_title == 'user'){
+                    $("#tab-user").hasClass('active')?'': $("#tab-user").addClass('active') ;
+                    $("#user_list").hasClass('in active')? '':$("#user_list").addClass('in active');
+                    $("#tab-user_role").hasClass('active')? $("#tab-user_role").removeClass('active'):'' ;
+                    $("#user_role").hasClass('in active')? $("#user_role").removeClass('in active'):'';
+                }*/
+            }
+
+        });
     });
 
     $("#a_user_newsletter").change(function () {
@@ -156,6 +174,10 @@ $(document).ready(function () {
             $("#u_user_status").val('0');
         }
     });
+
+    /*$("#pagination").change(function () {
+        alert($("#pagination").val());
+    });*/
 
     $("#b-cancel").click(function (e) {
         e.preventDefault();

@@ -28,15 +28,19 @@
     {{-- list user & use role --}}
     <div class="row" id="administration">
         <div class="well">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#user_role">User Role</a></li>
-                <li><a data-toggle="tab" href="#user_list">User List</a></li>
+            {{--<div class="col-sm-6">--}}
+
+            {{--</div>--}}
+            <div class="clearfix visible-sm-6"></div>
+            <ul class="nav nav-tabs ">
+                <li id="tab-user_role" class="active"><a data-toggle="tab" href="#user_role">User Role</a></li>
+                <li id="tab-user"><a data-toggle="tab" href="#user_list">User List</a></li>
             </ul>
 
             <div class="tab-content bg">
                 <div id="user_role" class="tab-pane fade in active">
                     <div class="table-responsive" style="padding: 20px 0;">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-condensed" style="min-width: 300px;">
                             <thead>
                             <tr>
                                 <th class="text-center">#</th>
@@ -49,7 +53,7 @@
                             @foreach ($user_role_datas as $data)
                                 {{--<input type="hidden" id="user_role_id" value="{{$data->id}}">--}}
                                 <tr>
-                                    <td class="col-xs-2 col-sm-2 text-center">{{$i++}}</td>
+                                    <td class="col-xs-2 col-sm-2 text-center">{{++$i}}</td>
                                     <td class="col-xs-3 col-sm-4">{{$data->role}}</td>
                                     <td class="col-xs-2 col-sm-2">
 
@@ -72,14 +76,34 @@
                             @endforeach
                             </tbody>
                         </table>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td class="col-sm-6 col-xs-8" style="min-width: 200px;">{{ $user_role_datas->render() }}</td>
+                                <td class="col-sm-6 col-xs-8" style="min-width: 100px;">
+                                    <form class="form-horizontal pull-right" role="form">
+                                        <div class="form-group">
+                                            <div class="col-sm-12 col-xs-12">
+                                                <label for="sel1">Set Page:</label>
+                                                <select class="form-control" id="pagination">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
                 <div id="user_list" class="tab-pane fade">
                     <div class="table-responsive" style="padding: 20px 0;">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" style="min-width: 300px;">
                             <thead>
                             <tr>
-                                <th class="text-center">ID</th>
+                                <th class="text-center">#</th>
                                 <th class="text-center">Email</th>
                                 <th class="text-center">Name</th>
                                 <th class="text-center">Role</th>
@@ -92,7 +116,8 @@
                             <tbody>
                             @foreach($user_datas as $user_data)
                                 <tr>
-                                    <td id="user_id">{{$user_data->id}}</td>
+                                    <td id="user_id" class="hidden">{{$user_data->id}}</td>
+                                    <td>{{++$j}}</td>
                                     <td>{{$user_data->email}}</td>
                                     <td>{{$user_data->username}}</td>
                                     <td>
@@ -117,6 +142,26 @@
                                 </tr>
                             @endforeach
                             </tbody>
+                        </table>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td class="col-sm-6 col-xs-8" style="min-width: 200px;">{{ $user_datas->render() }}</td>
+                                <td class="col-sm-6 col-xs-8" style="min-width: 100px;">
+                                    <form class="form-horizontal pull-right" role="form">
+                                        <div class="form-group">
+                                            <div class="col-sm-12 col-xs-12">
+                                                <label for="sel1">Set Page:</label>
+                                                <select class="form-control" id="pagination">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ use App\Category;
 use App\User;
 use App\UserType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
 
@@ -20,10 +21,12 @@ class BackendController extends Controller
         switch($url){
             /* Administration menu */
             case 'administration':
-                $user_role_datas = UserType::all();
-                $user_datas = User::all();
-                $i = 1;
-                return view('backends/administration', compact('user_role_datas', 'user_datas', 'i'));
+                /*$user_role_datas = UserType::all()->paginate(2);*/
+                $user_role_datas = DB::table('user_types')->paginate(5);
+                $user_datas =  DB::table('users')->paginate(5);
+                return view('backends/administration', compact('user_role_datas', 'user_datas'))
+                    ->with('i', ($request->input('page', 1) - 1) * 1)
+                ->with('j', ($request->input('page', 1) - 1) * 1);
                 break;
             /*  */
             case 'cart':
