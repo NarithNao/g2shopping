@@ -21,6 +21,10 @@ Route::get('{url}', 'FrontendController@checkUrl');
 Route::group(['prefix' => 'admin'], function () {
 
     Route::get('login', function () {
+        if(Session::has('logged_in')){
+            //print_r(Session::get('logged_in'));
+            return redirect('admin/dashboard');
+        }
         return view('backends/login');
     });
     Route::get('logout', function () {
@@ -32,8 +36,18 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('{url}', 'BackendController@checkUrl');
 
     Route::post('login', 'ModelBackendController@doLogin');
+
     Route::post('add_user_role', 'ModelBackendController@addUserRole');
     Route::get('user_role/{id}/search', 'ModelBackendController@searchUserRole');
     Route::post('update_user_role', 'ModelBackendController@updateUserRole');
     Route::post('delete_user_role', 'ModelBackendController@deleteUserRole');
+
+    Route::post('add_user', 'ModelBackendController@addUser');
+    Route::get('user/{id}/search', 'ModelBackendController@searchUser');
+    Route::post('update_user', 'ModelBackendController@updateUser');
+    Route::post('update_user_info', 'ModelBackendController@updateUserInfo');
+
+    Route::get('category/list', 'ModelBackendController@listCategory');
+    Route::post('add_category', 'ModelBackendController@addCategory');
+    Route::post('add_category_image', 'ModelBackendController@addCategoryImage');
 });

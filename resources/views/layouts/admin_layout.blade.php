@@ -248,7 +248,7 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
             <!-- /.dropdown -->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> {{$user['password']}} <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-user fa-fw"></i> {{$user[0]['username']}} <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="{{url('admin/profile')}}"><i class="fa fa-user fa-fw"></i> User Profile</a>

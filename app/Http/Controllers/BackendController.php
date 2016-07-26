@@ -2,32 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\User;
 use App\UserType;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
 
 class BackendController extends Controller
 {
 
     public function checkUrl(Request $request, $url){
-        /*if(!$request->session()->has('logged_in')){
+        if(!$request->session()->has('logged_in')){
             //print_r(Session::get('logged_in'));
             return redirect('admin/login');
-        }*/
+        }
         switch($url){
             /* Administration menu */
             case 'administration':
-                $datas = UserType::all();
+                $user_role_datas = UserType::all();
+                $user_datas = User::all();
                 $i = 1;
-                return view('backends/administration', compact('datas', 'i'));
+                return view('backends/administration', compact('user_role_datas', 'user_datas', 'i'));
                 break;
             /*  */
             case 'cart':
                 return view('backends/cart');
                 break;
             case 'category':
-                return view('backends/category');
+                $categories = Category::all();
+                return view('backends/category', compact('categories'));
                 break;
             case 'order':
                 return view('backends/order');
