@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Storage;
 
 class BackendController extends Controller
 {
@@ -34,6 +35,7 @@ class BackendController extends Controller
                 break;
             case 'category':
                 $categories = Category::all();
+                //echo Storage::disk('public1')->delete('images/category/a1.jpg');
                 return view('backends/category', compact('categories'));
                 break;
             case 'order':

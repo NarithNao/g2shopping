@@ -74,7 +74,7 @@
             <div class="page-header text-center text-info" style="margin-top: -20px;">
                 <h3>Add Category</h3>
             </div>
-            <form class="form-horizontal" role="form" method="POST" action="{{url('admin/add_category_image')}}" style="padding: 20px 0;">
+            <form class="form-horizontal" role="form" method="POST" action="{{url('admin/add_category_image')}}" enctype="multipart/form-data" style="padding: 20px 0;">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label class="col-sm-3 text-left" for="a_cate_name">Category name:</label>
@@ -88,12 +88,6 @@
                         <input type="text" class="form-control" id="a_cate_description" name="a_cate_description" placeholder="Enter description">
                     </div>
                 </div>
-                {{--<div class="form-group">
-                    <label class="col-sm-3 text-left" for="a_cate_image">Image:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="a_cate_image" name="a_cate_image" placeholder="Enter description">
-                    </div>
-                </div>--}}
                 <div class="form-group">
                     <label class="col-sm-3 text-left" for="a_position">Display Order:</label>
                     <div class="col-sm-9">
@@ -109,13 +103,13 @@
                         </select>
                     </div>
                 </div>
-                {{--<div class="form-group">
+                <div class="form-group">
                     <label class="col-sm-3 col-xs-6 text-left" for="a_cate_image">Image:</label>
                     <div class="col-sm-9 col-xs-6">
                         <img id="cate_image" src="{{asset('images/profile/img.png')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
-                        <input type="file" name="a_cate_image" id="a_cate_image" --}}{{--class="filestyle" data-input="false" data-buttonText="Choose Image"--}}{{--><br>
+                        <input type="file" name="a_cate_image" id="a_cate_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
                     </div>
-                </div>--}}
+                </div>
                 <div class="form-group">
                     <label class="col-sm-3 col-xs-6 text-left" for="a_show_on_homepage">Show on Homepage:</label>
                     <div class="col-sm-9 col-xs-6">
@@ -136,8 +130,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12 text-center">
-                        <a id="btn-add_category" class="btn btn-primary">Save</a>
-                        <input type="submit" id="btn-upload_image" class="btn btn-primary center-block hidden" value="Upload Image">
+                        <a id="btn-add_category" class="btn btn-primary hidden">Save</a>
+                        <input type="submit" id="btn-upload_image" class="btn btn-primary center-block" value="Upload Image">
                     </div>
                 </div>
             </form>

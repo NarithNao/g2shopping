@@ -54,6 +54,12 @@ return [
             'visibility' => 'public',
         ],
 
+        'public1' => [
+            'driver' => 'local',
+            'root' => storage_path('../public'),
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => 'your-key',

@@ -19,7 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('cate_image', 200);
             $table->tinyInteger('parent_category');
             $table->tinyInteger('show_on_homepage');
-            $table->tinyInteger('include_on_top_menu');
+            $table->tinyInteger('include_on_main_menu');
             $table->tinyInteger('position');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('phone', '20');
             $table->date('last_activity');
             $table->tinyInteger('newsletter');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ class CreateUserTypesTable extends Migration
             $table->increments('id');
             $table->char('role', '5');
             $table->string('description', '100');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

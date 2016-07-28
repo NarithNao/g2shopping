@@ -171,18 +171,13 @@ class ModelBackendController extends Controller
     }
 
     public function addCategoryImage(Request $request){
-        $image_name = $request->file('a_cate_image')->getClientOriginalName();
-        $image_extension = $request->file('a_cate_image')->getClientOriginalExtension();
-        $image_new_name = md5(microtime(true));
-        $temp_file = base_path() . '/public/images/category/'.strtolower($image_new_name . '_temp.' . $image_extension);
-        $request->file('a_cate_image')
-            ->move( base_path() . '/public/images/category/', strtolower($image_new_name . '_temp.' . $image_extension) );
-
-        //$imageTempName = Input::file('a_cate_image')->getPathname();
-        //$imageName = Input::file('a_cate_image')->getClientOriginalName();
-        //$path = base_path() . '\public\images\category';
-        //Input::file('photo')->move($path);
-        //Input::file('a_cate_image')->move($path , $imageName);
-        //return $imageName;
+        //$img = $request->file('a_cate_image');
+        $path = base_path() . '\public\images\category';
+        if($request->hasFile('a_cate_image')){
+            $request->file('a_cate_image')->move($path, $request->file('a_cate_image')->getClientOriginalName());
+            echo 'ok';
+        }
+        else
+            echo 'no';
     }
 }
