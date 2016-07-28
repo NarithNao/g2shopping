@@ -50,4 +50,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('category/list', 'ModelBackendController@listCategory');
     Route::post('add_category', 'ModelBackendController@addCategory');
     Route::post('add_category_image', 'ModelBackendController@addCategoryImage');
+    Route::get('category/{id}/search', 'ModelBackendController@searchCategory');
+    Route::post('delete_category', 'ModelBackendController@deleteCategory');
 });

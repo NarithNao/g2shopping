@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ModelBackendController extends Controller
 {
@@ -158,15 +159,13 @@ class ModelBackendController extends Controller
         $data = array(
             'cate_name'             =>  $request->cate_name,
             'cate_description'      =>  $request->description,
-            //'cate_image'            =>  $request->a_cate_image,
-            'parent_category'       =>  $request->parent_category,
-            'show_on_home_page'     =>  $request->show_on_homepage,
-            'include_on_top_menu'   =>  $request->include_on_top_menu,
-            'position'              =>  $request->position,
-            'status'                =>  1,
+            'cate_image'            =>  $request->cate_image,
+            'parent_category'       =>  intval($request->parent_category),
+            'show_on_homepage'     =>  intval($request->show_on_homepage),
+            'include_on_main_menu'  =>  intval($request->include_on_main_menu),
+            'position'              =>  intval($request->position),
         );
         $user = $category->create($data);
-        //echo "<script>history.back();</script>";
         return $user;
     }
 
@@ -175,9 +174,25 @@ class ModelBackendController extends Controller
         $path = base_path() . '\public\images\category';
         if($request->hasFile('a_cate_image')){
             $request->file('a_cate_image')->move($path, $request->file('a_cate_image')->getClientOriginalName());
-            echo 'ok';
+            return back();
         }
         else
-            echo 'no';
+            echo "<script>alert('Upload image failed.'); history.back();</script>";
     }
+
+    public function searchCategory($id, Category $category){
+        $cate = $category->find($id);
+        return $cate;
+    }
+
+    public function deleteCategory(Request $request, Category $category){
+        $cate = $category->find($request->d_cate_id);
+        //$cate->cate_image = $cate->cate_image==null?'':$cate->cate_image;
+        $image_path = 'images/category/'.$cate->cate_image;
+        Storage::disk('public1')->delete($image_path);
+        $cate->delete();
+
+        return back();
+    }
+
 }

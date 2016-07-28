@@ -35,8 +35,9 @@ class BackendController extends Controller
                 break;
             case 'category':
                 $categories = Category::all();
-                //echo Storage::disk('public1')->delete('images/category/a1.jpg');
-                return view('backends/category', compact('categories'));
+                //Storage::disk('public1')->delete('images/category/a1.jpg');
+                $i=1;
+                return view('backends/category', compact('categories', 'i'));
                 break;
             case 'order':
                 return view('backends/order');

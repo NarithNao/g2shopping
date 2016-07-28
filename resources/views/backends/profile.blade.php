@@ -65,7 +65,7 @@ $user = App\User::find($user_session[0]['id']);
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="city">Country:</label>
+                            <label class="control-label col-sm-2" for="city">City:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" value="{{$user->city}}">
                             </div>
@@ -82,12 +82,6 @@ $user = App\User::find($user_session[0]['id']);
                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone" value="{{$user->phone}}">
                             </div>
                         </div>
-                        {{--<div class="form-group">
-                            <label class="control-label col-sm-2 col-xs-6" for="status">Status:</label>
-                            <div class="col-sm-10 col-xs-6">
-                                <input type="checkbox" name="status" id="status">
-                            </div>
-                        </div>--}}
                         <div class="form-group">
                             <label class="control-label col-sm-2 col-xs-6" for="newsletter">Newsletter:</label>
                             <div class="col-sm-10 col-xs-6">

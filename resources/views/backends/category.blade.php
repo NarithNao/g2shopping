@@ -32,18 +32,21 @@
                     <thead>
                     <tr>
                         <th class="text-center col-xs-1">#</th>
+                        <th class="text-center">Image</th>
                         <th class="text-center">Name</th>
                         <th class="text-center">Display Order</th>
                         <th class="text-center col-xs-1">Status</th>
-                        <th class="text-center col-xs-4 col-sm-4">Action</th>
+                        <th class="text-center" style="min-width: 70px;">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($categories as $category)
                     <tr>
-                        <td>{{$category->id}}</td>
+                        <input type="hidden" name="cate_id" id="cate_id" value="{{$category->id}}">
+                        <td class="text-center">{{$i++}}</td>
+                        <td class="text-center"><img src="{{asset('images/category/'.$category->cate_image)}}" class="img-rounded" alt="Category Image" style="max-height: 50px;"></td>
                         <td>{{$category->cate_name}}</td>
-                        <td>{{$category->position}}</td>
+                        <td class="text-center">{{$category->position}}</td>
                         <td>
                             @if($category->status == 1)
                                 <a href="#" class="btn btn-xs center-block" data-toggle="tooltip" title="Active">
@@ -74,70 +77,159 @@
             <div class="page-header text-center text-info" style="margin-top: -20px;">
                 <h3>Add Category</h3>
             </div>
-            <form class="form-horizontal" role="form" method="POST" action="{{url('admin/add_category_image')}}" enctype="multipart/form-data" style="padding: 20px 0;">
+            <form class="form-horizontal" id="frm_upload_image" role="form" method="POST" action="{{url('admin/add_category_image')}}" enctype="multipart/form-data" style="padding: 20px 0;">
                 {{ csrf_field() }}
-                <div class="form-group">
-                    <label class="col-sm-3 text-left" for="a_cate_name">Category name:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="a_cate_name" name="a_cate_name" placeholder="Enter Category name">
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left" for="a_cate_name">Category name:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="a_cate_name" name="a_cate_name" placeholder="Enter Category name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left" for="a_cate_description">Description:</label>
+                        <div class="col-sm-8">
+                            {{--<input type="text" class="form-control" id="a_cate_description" name="a_cate_description" placeholder="Enter description">--}}
+                            <textarea class="form-control" rows="10" id="a_cate_description" name="a_cate_description" style="resize: vertical;"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 col-xs-6 text-left" for="a_show_on_homepage">Show on Homepage:</label>
+                        <div class="col-sm-8 col-xs-6">
+                            <input type="checkbox" name="a_show_on_homepage" id="a_show_on_homepage">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class=" col-sm-4 col-xs-6 text-left" for="a_include_on_main_menu">Include on main menu:</label>
+                        <div class="col-sm-8 col-xs-6">
+                            <input type="checkbox" name="a_include_on_main_menu" id="a_include_on_main_menu">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 text-left" for="a_cate_description">Description:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="a_cate_description" name="a_cate_description" placeholder="Enter description">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="text-left" for="a_position">Display Order:</label>
+                            <input type="text" class="form-control" id="a_position" name="a_position" placeholder="Enter Display order">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 text-left" for="a_position">Display Order:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="a_position" name="a_position" placeholder="Enter Display order">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="text-left" for="a_parent_category">Parent Category:</label>
+                            <select class="form-control" id="a_parent_category" name="a_parent_category">
+                                {{--<option>1</option>
+                                <option>2</option>--}}
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 text-left" for="a_parent_category">Parent Category:</label>
-                    <div class="col-sm-9">
-                        <select class="form-control" id="a_parent_category" name="a_parent_category">
-                            {{--<option>1</option>
-                            <option>2</option>--}}
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 col-xs-6 text-left" for="a_cate_image">Image:</label>
-                    <div class="col-sm-9 col-xs-6">
-                        <img id="cate_image" src="{{asset('images/profile/img.png')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
-                        <input type="file" name="a_cate_image" id="a_cate_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 col-xs-6 text-left" for="a_show_on_homepage">Show on Homepage:</label>
-                    <div class="col-sm-9 col-xs-6">
-                        <input type="checkbox" name="a_show_on_homepage" id="a_show_on_homepage">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class=" col-sm-3 col-xs-6 text-left" for="a_include_on_top_menu">Include on top menu:</label>
-                    <div class="col-sm-9 col-xs-6">
-                        <input type="checkbox" name="a_include_on_top_menu" id="a_include_on_top_menu">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class=" col-sm-3 col-xs-6 text-left" for="a_status">Publish:</label>
-                    <div class="col-sm-9 col-xs-6">
-                        <input type="checkbox" name="a_status" id="a_status" value="0">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            {{--<label class="text-left" for="a_cate_image">Image:</label>--}}
+                            <img id="cate_image" src="{{asset('images/profile/img.png')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
+                            <input type="file" name="a_cate_image" id="a_cate_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12 text-center">
-                        <a id="btn-add_category" class="btn btn-primary hidden">Save</a>
-                        <input type="submit" id="btn-upload_image" class="btn btn-primary center-block" value="Upload Image">
+                        <a id="btn-add_category" class="btn btn-primary">Save</a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
     {{-- end add category --}}
+
+    {{-- update category --}}
+    <div class="row" id="l-update_category" style="display: none;">
+        <div class="well">
+            <div class="page-header text-center text-info" style="margin-top: -20px;">
+                <h3>Update Category</h3>
+            </div>
+            <form class="form-horizontal" id="u_frm_upload_image" role="form" method="POST" action="{{url('admin/upload_category_image')}}" enctype="multipart/form-data" style="padding: 20px 0;">
+                {{ csrf_field() }}
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left" for="u_cate_name">Category name:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="u_cate_name" name="u_cate_name" placeholder="Enter Category name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 text-left" for="u_cate_description">Description:</label>
+                        <div class="col-sm-8">
+                            {{--<input type="text" class="form-control" id="a_cate_description" name="a_cate_description" placeholder="Enter description">--}}
+                            <textarea class="form-control" rows="10" id="u_cate_description" name="u_cate_description" style="resize: vertical;"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 col-xs-6 text-left" for="u_show_on_homepage">Show on Homepage:</label>
+                        <div class="col-sm-8 col-xs-6">
+                            <input type="checkbox" name="u_show_on_homepage" id="u_show_on_homepage">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class=" col-sm-4 col-xs-6 text-left" for="u_include_on_main_menu">Include on main menu:</label>
+                        <div class="col-sm-8 col-xs-6">
+                            <input type="checkbox" name="u_include_on_main_menu" id="u_include_on_main_menu">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="text-left" for="u_position">Display Order:</label>
+                            <input type="text" class="form-control" id="u_position" name="u_position" placeholder="Enter Display order">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="text-left" for="u_parent_category">Parent Category:</label>
+                            <select class="form-control" id="u_parent_category" name="u_parent_category">
+                                {{--<option>1</option>
+                                <option>2</option>--}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12" id="u_cate_image">
+                            {{--<label class="text-left" for="a_cate_image">Image:</label>--}}
+                            <img id="cate_image" src="{{asset('images/profile/img.png')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
+                            <input type="file" name="a_cate_image" id="a_cate_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12 text-center">
+                        <a id="btn-update_category" class="btn btn-primary">Update</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{-- end update category --}}
+
+    {{-- delete category --}}
+    <div class="row" id="l-delete_category" style="display: none;">
+        <div class="well" {{--style="position: fixed;"--}}>
+            <div class="page-header text-center text-info" style="margin-top: -20px;">
+                <h3>Delete Category</h3>
+            </div>
+            <form class="form-horizontal" role="form" method="POST" action="{{url('admin/delete_category')}}" style="padding: 20px 0;">
+                {{ csrf_field() }}
+                <input type="hidden" id="d_cate_id" name="d_cate_id" >
+                <div class="form-group">
+                    <label class="col-sm-12 text-center">Are you sure want to delete this Category?</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="submit" class="btn btn-primary center-block" value="Delete">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{-- end delete category --}}
 
 @endsection
 
