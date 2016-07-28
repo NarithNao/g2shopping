@@ -42,7 +42,6 @@
                     <tbody>
                     @foreach($categories as $category)
                     <tr>
-                        <input type="hidden" name="cate_id" id="cate_id" value="{{$category->id}}">
                         <td class="text-center">{{$i++}}</td>
                         <td class="text-center"><img src="{{asset('images/category/'.$category->cate_image)}}" class="img-rounded" alt="Category Image" style="max-height: 50px;"></td>
                         <td>{{$category->cate_name}}</td>
@@ -172,6 +171,12 @@
                         <label class=" col-sm-4 col-xs-6 text-left" for="u_include_on_main_menu">Include on main menu:</label>
                         <div class="col-sm-8 col-xs-6">
                             <input type="checkbox" name="u_include_on_main_menu" id="u_include_on_main_menu">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class=" col-sm-4 col-xs-6 text-left" for="u_status">Publish:</label>
+                        <div class="col-sm-8 col-xs-6">
+                            <input type="checkbox" name="u_status" id="u_status">
                         </div>
                     </div>
                 </div>
