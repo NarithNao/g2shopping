@@ -3,6 +3,14 @@
  * file name 'category.js'
  */
 
+/*$(document).ajaxStart(function(){
+    plugin.loadingStart('#category');
+});*/
+
+/*$(document).ajaxStop(function(){
+    //plugin.loadingStop('#category');
+});*/
+
 $(document).ready(function () {
     var fname = 'profile.png';
 

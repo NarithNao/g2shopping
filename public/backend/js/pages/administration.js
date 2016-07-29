@@ -2,7 +2,41 @@
  * Created by Narith on 7/28/2016.
  * file name 'administration.js'
  */
+
+var administration = {};
+
+administration.fillData = function(){
+    g2shopping.jsGetReq('/admin/list_user_role', function (result) {
+        $("#tb_user_role > tbody tr").remove();
+        if(result.length > 0){
+            $.each(result, function(index, val){
+                var tblRow = val.status == 1? $('<tr>').append(
+                    $('<td class="col-xs-2 col-sm-2 text-center">').text(index+1),
+                    $('<td class="col-xs-3 col-sm-4">').text(val.role),
+                    $('<td class="col-xs-2 col-sm-2">').append($('<a href="#" class="btn btn-xs center-block" data-toggle="tooltip" title="Active">').append('<span class="glyphicon glyphicon-ok-circle">')),
+                    $('<td class="col-xs-5 col-sm-4">').append(
+                        $('<a href="'+val.id+'" class="btn btn-warning btn-xs col-xs-5 col-xs-offset-1 btn_update_user_role" data-toggle="tooltip" title="Update">').append($('<i class="fa fa-pencil">')),
+                        $('<a href="'+val.id+'" class="btn btn-danger btn-xs col-xs-5 col-xs-offset-1 btn_delete_user_role" data-toggle="tooltip" title="Delete">').append($('<i class="fa fa-times">'))
+                    )
+                ):$('<tr>').append(
+                    $('<td class="col-xs-2 col-sm-2 text-center">').text(index+1),
+                    $('<td class="col-xs-3 col-sm-4">').text(val.role),
+                    $('<td class="col-xs-2 col-sm-2">').append($('<a href="#" class="btn btn-xs center-block" data-toggle="tooltip" title="Active">').append('<span class="glyphicon glyphicon-remove-circle">')),
+                    $('<td class="col-xs-5 col-sm-4">').append(
+                        $('<a href="'+val.id+'" onclick="" class="btn btn-warning btn-xs col-xs-5 col-xs-offset-1 btn_update_user_role" data-toggle="tooltip" title="Update">').append($('<i class="fa fa-pencil">')),
+                        $('<a href="'+val.id+'" class="btn btn-danger btn-xs col-xs-5 col-xs-offset-1 btn_delete_user_role" data-toggle="tooltip" title="Delete">').append($('<i class="fa fa-times">'))
+                    )
+                );
+                $('#tb_user_role > tbody').append(tblRow);
+            });
+        }
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+};
+
 $(document).ready(function () {
+
+    administration.fillData();
 
     $("#b-add_user_role").click(function (e) {
         e.preventDefault();
@@ -14,7 +48,7 @@ $(document).ready(function () {
         $("#a_user_role").focus();
     });
 
-    $(".btn_update_user_role").click(function (e) {
+    $(document).on('click','#tb_user_role > tbody tr td a.btn_update_user_role', function(e){
         e.preventDefault();
         var id = g2shopping.getLinkID(this.href);
         var url = '/admin/user_role/'+id+'/search';
@@ -34,11 +68,12 @@ $(document).ready(function () {
                 $("#u_status").prop('checked', true);
                 $("#u_status").val('1');
             }
+
         });
 
     });
 
-    $(".btn_delete_user_role").click(function (e) {
+    $(document).on('click','#tb_user_role > tbody tr td a.btn_delete_user_role', function(e){
         e.preventDefault();
         var id = g2shopping.getLinkID(this.href);
         var url = '/admin/user_role/'+id+'/search';
@@ -51,7 +86,6 @@ $(document).ready(function () {
             $("#l-delete_user_role").show();
             $("#d_user_role_id").val(result.id);
         });
-
     });
 
     $("#u_status").change(function () {
@@ -116,6 +150,7 @@ $(document).ready(function () {
     $("#a_user_newsletter").change(function () {
         if ($(this).prop("checked")) {
             $(this).val('1');
+
         }else{
             $(this).val('0');
         }
@@ -164,10 +199,12 @@ $(document).ready(function () {
         };
         g2shopping.jsPostReq(url, input, function (result) {
             if(!result){
-                popup.fail(title, content).open();
+                plugin.popup.fail(title, content);
             }
-            popup.success(title, content).open();
+            plugin.popup.success(title, content);
         });
-    })
+        administration.fillData();
+        $("#b-cancel").click();
+    });
 
 });

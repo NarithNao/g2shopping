@@ -49,8 +49,8 @@
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            @foreach ($user_role_datas as $data)
+                            <tbody id="abc">
+                            {{--@foreach ($user_role_datas as $data)
                                 <tr>
                                     <td class="col-xs-2 col-sm-2 text-center">{{$i++}}</td>
                                     <td class="col-xs-3 col-sm-4">{{$data->role}}</td>
@@ -70,7 +70,7 @@
                                         <a href="{{url($data->id)}}" class="btn btn-danger btn-xs col-xs-5 col-xs-offset-1 btn_delete_user_role" data-toggle="tooltip" title="Delete"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endforeach--}}
                             </tbody>
                         </table>
                         <table style="width: 100%;">

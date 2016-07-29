@@ -35,6 +35,13 @@ class ModelBackendController extends Controller
 
     }
 
+    public function listUserRole(Request $request, UserType $userType){
+        if(!$request->ajax()){
+            return redirect('admin/page-not-found');
+        }
+        return $userType->all();
+    }
+
     public function addUserRole(Request $request, UserType $userType){
         $data = array(
             'role' => $request->a_user_role,
@@ -53,8 +60,7 @@ class ModelBackendController extends Controller
     }
 
     public function updateUserRole(Request $request, UserType $userType){
-        /*$res['title'] = null;
-        $res['content'] = null;*/
+
         $data = $userType->find($request->user_role_id);
         $data->role = $request->user_role;
         $data->description = $request->description;

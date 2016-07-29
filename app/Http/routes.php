@@ -33,10 +33,9 @@ Route::group(['prefix' => 'admin'], function () {
         return redirect('admin/login');
     });
 
-    Route::get('{url}', 'BackendController@checkUrl');
-
     Route::post('login', 'ModelBackendController@doLogin');
 
+    Route::get('list_user_role', 'ModelBackendController@listUserRole');
     Route::post('add_user_role', 'ModelBackendController@addUserRole');
     Route::get('user_role/{id}/search', 'ModelBackendController@searchUserRole');
     Route::post('update_user_role', 'ModelBackendController@updateUserRole');
@@ -52,4 +51,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('add_category_image', 'ModelBackendController@addCategoryImage');
     Route::get('category/{id}/search', 'ModelBackendController@searchCategory');
     Route::post('delete_category', 'ModelBackendController@deleteCategory');
+
+    Route::get('{url}', 'BackendController@checkUrl');
+
 });

@@ -17,12 +17,14 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
     <link rel="icon" type="image/png" href="{{asset('images/logo/g2-logo.png')}}" sizes="32x32">
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media="all">
+    <!-- Bootstrap Theme CSS -->
+    <link href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}" rel="stylesheet" type="text/css" media="all">
     <!-- MetisMenu CSS -->
     <link href="{{asset('backend/bower_components/metisMenu/metisMenu.css')}}" rel="stylesheet" type="text/css" media="all">
     <!-- Custom CSS -->
     <link href="{{asset('backend/bower_components/sb-admin/sb-admin-2.css')}}" rel="stylesheet" type="text/css" media="all">
-    <!-- Vdialog CSS -->
-    <link href="{{asset('backend/bower_components/mgDialog/mgDialog.css')}}" rel="stylesheet" type="text/css" media="all">
+    <!-- waitMe CSS -->
+    <link href="{{asset('backend/bower_components/waitMe/waitMe.min.css')}}" rel="stylesheet" type="text/css" media="all">
     <!-- Custom Fonts -->
     <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
 
@@ -51,6 +53,7 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{{url('admin/dashboard')}}">G2Shopping</a>
+            <a href="{{url('/')}}"><img src="{{asset('images/logo/shopping-logo.png')}}" width="20px;" style="margin-top: 15px;" data-toggle="tooltip" title="Go to Store Front" data-placement="right"></a>
         </div>
         <!-- /.navbar-header -->
 
@@ -409,12 +412,14 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
 <script src="{{asset('backend/bower_components/metisMenu/metisMenu.js')}}"></script>
 <!-- Custom Theme JavaScript -->
 <script src="{{asset('backend/bower_components/sb-admin/sb-admin-2.js')}}"></script>
-{{-- Vdialog plugin Javascript --}}
-<script src="{{asset('backend/bower_components/mgDialog/mgDialog.js')}}"></script>
+{{-- waitMe plugin Javascript --}}
+<script src="{{asset('backend/bower_components/waitMe/waitMe.min.js')}}"></script>
+{{-- toaster plugin Javascript --}}
+<script src="{{asset('jquery/jquery.toaster.js')}}"></script>
 
 {{-- Custom own Javascript functions --}}
 <script src="{{asset('backend/js/g2shopping.utilities.js')}}"></script>
-<script src="{{asset('backend/js/g2shopping.popup.js')}}"></script>
+<script src="{{asset('backend/js/g2shopping.plugin.js')}}"></script>
 
     @yield('js')
 
