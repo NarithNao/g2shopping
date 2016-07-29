@@ -49,3 +49,5 @@ g2shopping.getLinkID = function (url) {
     var id = s_url[s_url.length - 1];
     return id;
 };
+
+

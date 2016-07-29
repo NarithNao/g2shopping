@@ -88,7 +88,6 @@
                     <div class="form-group">
                         <label class="col-sm-4 text-left" for="a_cate_description">Description:</label>
                         <div class="col-sm-8">
-                            {{--<input type="text" class="form-control" id="a_cate_description" name="a_cate_description" placeholder="Enter description">--}}
                             <textarea class="form-control" rows="10" id="a_cate_description" name="a_cate_description" style="resize: vertical;"></textarea>
                         </div>
                     </div>
@@ -123,7 +122,6 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12">
-                            {{--<label class="text-left" for="a_cate_image">Image:</label>--}}
                             <img id="cate_image" src="{{asset('images/profile/img.png')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
                             <input type="file" name="a_cate_image" id="a_cate_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
                         </div>
@@ -140,8 +138,8 @@
     {{-- end add category --}}
 
     {{-- update category --}}
-    <div class="row" id="l-update_category" style="display: none;">
-        <div class="well">
+    <div class="row" id="l-update_category1" style="display: none;">
+        {{--<div class="well">
             <div class="page-header text-center text-info" style="margin-top: -20px;">
                 <h3>Update Category</h3>
             </div>
@@ -157,7 +155,6 @@
                     <div class="form-group">
                         <label class="col-sm-4 text-left" for="u_cate_description">Description:</label>
                         <div class="col-sm-8">
-                            {{--<input type="text" class="form-control" id="a_cate_description" name="a_cate_description" placeholder="Enter description">--}}
                             <textarea class="form-control" rows="10" id="u_cate_description" name="u_cate_description" style="resize: vertical;"></textarea>
                         </div>
                     </div>
@@ -191,14 +188,14 @@
                         <div class="col-sm-12">
                             <label class="text-left" for="u_parent_category">Parent Category:</label>
                             <select class="form-control" id="u_parent_category" name="u_parent_category">
-                                {{--<option>1</option>
-                                <option>2</option>--}}
+                                --}}{{--<option>1</option>
+                                <option>2</option>--}}{{--
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12" id="u_cate_image">
-                            {{--<label class="text-left" for="a_cate_image">Image:</label>--}}
+                            --}}{{--<label class="text-left" for="a_cate_image">Image:</label>--}}{{--
                             <img id="cate_image" src="{{asset('images/profile/img.png')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
                             <input type="file" name="a_cate_image" id="a_cate_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
                         </div>
@@ -210,8 +207,9 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div>--}}
     </div>
+    {{--<iframe id="l-update_category"></iframe>--}}
     {{-- end update category --}}
 
     {{-- delete category --}}

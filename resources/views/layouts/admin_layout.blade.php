@@ -21,6 +21,8 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
     <link href="{{asset('backend/bower_components/metisMenu/metisMenu.css')}}" rel="stylesheet" type="text/css" media="all">
     <!-- Custom CSS -->
     <link href="{{asset('backend/bower_components/sb-admin/sb-admin-2.css')}}" rel="stylesheet" type="text/css" media="all">
+    <!-- Vdialog CSS -->
+    <link href="{{asset('backend/bower_components/mgDialog/mgDialog.css')}}" rel="stylesheet" type="text/css" media="all">
     <!-- Custom Fonts -->
     <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
 
@@ -407,8 +409,12 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
 <script src="{{asset('backend/bower_components/metisMenu/metisMenu.js')}}"></script>
 <!-- Custom Theme JavaScript -->
 <script src="{{asset('backend/bower_components/sb-admin/sb-admin-2.js')}}"></script>
+{{-- Vdialog plugin Javascript --}}
+<script src="{{asset('backend/bower_components/mgDialog/mgDialog.js')}}"></script>
+
 {{-- Custom own Javascript functions --}}
 <script src="{{asset('backend/js/g2shopping.utilities.js')}}"></script>
+<script src="{{asset('backend/js/g2shopping.popup.js')}}"></script>
 
     @yield('js')
 

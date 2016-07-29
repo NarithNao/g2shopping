@@ -40,7 +40,7 @@
                 {{-- list user role --}}
                 <div id="user_role" class="tab-pane fade in active">
                     <div class="table-responsive" style="padding: 20px 0;">
-                        <table class="table table-bordered table-condensed" style="min-width: 300px;">
+                        <table id="tb_user_role" class="table table-bordered table-condensed" style="min-width: 300px;">
                             <thead>
                             <tr>
                                 <th class="text-center">#</th>
@@ -99,7 +99,7 @@
                 {{-- list user --}}
                 <div id="user_list" class="tab-pane fade">
                     <div class="table-responsive" style="padding: 20px 0;">
-                        <table class="table table-bordered" style="min-width: 300px;">
+                        <table id="tb_user" class="table table-bordered" style="min-width: 300px;">
                             <thead>
                             <tr>
                                 <th class="text-center">#</th>
@@ -229,7 +229,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <input type="submit" class="btn btn-primary center-block" value="Update">
+                        <a href="#" class="btn btn-primary center-block" id="btn_update_user_role" style="max-width: 100px;">Update</a>
+                        {{--<input type="submit" class="btn btn-primary center-block" value="Update">--}}
                     </div>
                 </div>
             </form>

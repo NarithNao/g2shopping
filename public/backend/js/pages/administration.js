@@ -150,4 +150,24 @@ $(document).ready(function () {
         $("#l-edit_user").hide();
     });
 
+    $("#btn_update_user_role").click(function (e) {
+        e.preventDefault();
+        var title = 'Update User Role';
+        var content = 'Update';
+        var url = '/admin/update_user_role';
+        var input = {
+            '_token'        : $("input[name=_token]").val(),
+            'user_role_id'  : $("#u_user_role_id").val(),
+            'user_role'     : $("#u_user_role").val(),
+            'description'   : $("#u_description").val(),
+            'status'        : $("#u_status").val(),
+        };
+        g2shopping.jsPostReq(url, input, function (result) {
+            if(!result){
+                popup.fail(title, content).open();
+            }
+            popup.success(title, content).open();
+        });
+    })
+
 });
