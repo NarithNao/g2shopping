@@ -1,49 +1,7 @@
-var category = {};
-
-category.jsPostReq = function (url, input, callback) {
-    $.ajax({
-        url: '' + url,
-        type: 'POST',
-        data: input,
-        dataType: 'json',
-        error: function(xhr, textStatus, errorThrown){
-            alert(xhr.statusText);
-        },
-        success: function(result){
-            try{
-                console.log(result);
-                callback(result);
-            }catch(e){
-                alert('error');
-            }
-        }
-    });
-};
-
-category.jsGetReq = function (url, callback) {
-    $.ajax({
-        url: url,
-        type: 'Get',
-        dataType: 'json',
-        error: function(xhr, textStatus, errorThrown){
-            alert(xhr.statusText);
-        },
-        success: function(result){
-            try{
-                console.log(result);
-                callback(result);
-            }catch(e){
-                alert('error');
-            }
-        }
-    });
-};
-
-category.getLinkID = function (url) {
-    var s_url = url.split('/');
-    var id = s_url[s_url.length - 1];
-    return id;
-};
+/**
+ * Created by Narith on 7/28/2016.
+ * file name 'category.js'
+ */
 
 $(document).ready(function () {
     var fname = 'profile.png';
@@ -60,7 +18,7 @@ $(document).ready(function () {
         e.preventDefault();
         var url = '/admin/category/list';
 
-        category.jsGetReq(url, function (result) {
+        g2shopping.jsGetReq(url, function (result) {
             $("#a_parent_category").empty();
             if(result.length < 1){
                 $("#a_parent_category").append($('<option>').val('0').text('Choose parent category'));
@@ -95,7 +53,7 @@ $(document).ready(function () {
             'include_on_main_menu': $("#a_include_on_main_menu").val(),
             'status'              : $("#a_status").val(),
         };
-        category.jsPostReq(url, input, function (result) {
+        g2shopping.jsPostReq(url, input, function (result) {
             $("#frm_upload_image").submit();
         });
 
@@ -139,10 +97,10 @@ $(document).ready(function () {
     $(".btn_delete_category").click(function (e) {
         e.preventDefault();
 
-        var id = category.getLinkID(this.href)
+        var id = g2shopping.getLinkID(this.href)
         var url = '/admin/category/'+id+'/search';
-        
-        category.jsGetReq(url, function (result) {
+
+        g2shopping.jsGetReq(url, function (result) {
             $("#category").hide();
             $("#b-add_category").hide();
             $("#b-cancel").removeClass('hidden');
@@ -154,10 +112,10 @@ $(document).ready(function () {
 
     $(".btn_update_category").click(function (e) {
         e.preventDefault();
-        var id = category.getLinkID(this.href)
+        var id = g2shopping.getLinkID(this.href)
         var url = '/admin/category/'+id+'/search';
 
-        category.jsGetReq(url, function(result){
+        g2shopping.jsGetReq(url, function(result){
             $("#category").hide();
             $("#b-add_category").hide();
             $("#b-cancel").removeClass('hidden');

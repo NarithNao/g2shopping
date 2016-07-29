@@ -6,10 +6,10 @@ $(document).ready(function () {
     });
 
     $("#newsletter").change(function () {
-        if ($("#newsletter").prop("checked")) {
-            $("#newsletter").val('1');
+        if ($(this).prop("checked")) {
+            $(this).val('1');
         }else{
-            $("#newsletter").val('0');
+            $(this).val('0');
         }
     });
 

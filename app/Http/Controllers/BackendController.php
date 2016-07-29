@@ -6,10 +6,10 @@ use App\Category;
 use App\User;
 use App\UserType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+//use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Storage;
+//use Illuminate\Support\Facades\Storage;
 
 class BackendController extends Controller
 {
@@ -22,12 +22,11 @@ class BackendController extends Controller
         switch($url){
             /* Administration menu */
             case 'administration':
-                /*$user_role_datas = UserType::all()->paginate(2);*/
-                $user_role_datas = DB::table('user_types')->paginate(5);
-                $user_datas =  DB::table('users')->paginate(5);
-                return view('backends/administration', compact('user_role_datas', 'user_datas'))
-                    ->with('i', ($request->input('page', 1) - 1) * 1)
-                ->with('j', ($request->input('page', 1) - 1) * 1);
+                $user_role_datas = UserType::all();
+                $user_datas =  User::all();
+                $i=1;
+                $j=1;
+                return view('backends/administration', compact('user_role_datas', 'user_datas', 'i', 'j'));
                 break;
             /*  */
             case 'cart':
@@ -53,6 +52,9 @@ class BackendController extends Controller
                 break;
             case 'dashboard':
                 return view('backends/index');
+            case 'page-not-found':
+                return view('frontends/404');
+                break;
             default:
                 return view('frontends/404');
         }

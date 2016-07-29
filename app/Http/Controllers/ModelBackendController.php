@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class ModelBackendController extends Controller
@@ -20,12 +19,7 @@ class ModelBackendController extends Controller
             'email'    => 'required|email',
             'password' => 'required|alphaNum|min:4'
         );
-        //$msg ='';
         $this->validate($request, $rule);
-        $userdata = array(
-            'email' => $request->email,
-            'password' => $request->password
-        );
         $user = DB::table('users')->where([
             ['user_type_id', 1],
             ['email', $request->email],
@@ -50,7 +44,10 @@ class ModelBackendController extends Controller
         return back();
     }
 
-    public function searchUserRole($id, UserType $userType){
+    public function searchUserRole($id, Request $request, UserType $userType){
+        if(!$request->ajax()){
+            return redirect('admin/page-not-found');
+        }
         $datas = $userType->find($id);
         return $datas;
     }
@@ -101,7 +98,10 @@ class ModelBackendController extends Controller
         return back();
     }
 
-    public function searchUser($id, User $user){
+    public function searchUser($id,Request $request, User $user){
+        if(!$request->ajax()){
+            return redirect('admin/page-not-found');
+        }
         $data = $user->find($id);
         return $data;
     }

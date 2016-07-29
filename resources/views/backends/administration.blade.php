@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    {{-- conten header --}}
     <input type="hidden" id="url" value="{{url('admin')}}">
     <div class="row">
         <div class="col-lg-12">
@@ -24,20 +25,19 @@
             </div>
         </div>
     </div>
+    {{-- end conten header --}}
 
     {{-- list user & use role --}}
     <div class="row" id="administration">
         <div class="well">
-            {{--<div class="col-sm-6">--}}
-
-            {{--</div>--}}
-            <div class="clearfix visible-sm-6"></div>
+            {{--<div class="clearfix visible-sm-6"></div>--}}
             <ul class="nav nav-tabs ">
                 <li id="tab-user_role" class="active"><a data-toggle="tab" href="#user_role">User Role</a></li>
                 <li id="tab-user"><a data-toggle="tab" href="#user_list">User List</a></li>
             </ul>
 
             <div class="tab-content bg">
+                {{-- list user role --}}
                 <div id="user_role" class="tab-pane fade in active">
                     <div class="table-responsive" style="padding: 20px 0;">
                         <table class="table table-bordered table-condensed" style="min-width: 300px;">
@@ -51,12 +51,10 @@
                             </thead>
                             <tbody>
                             @foreach ($user_role_datas as $data)
-                                {{--<input type="hidden" id="user_role_id" value="{{$data->id}}">--}}
                                 <tr>
-                                    <td class="col-xs-2 col-sm-2 text-center">{{++$i}}</td>
+                                    <td class="col-xs-2 col-sm-2 text-center">{{$i++}}</td>
                                     <td class="col-xs-3 col-sm-4">{{$data->role}}</td>
                                     <td class="col-xs-2 col-sm-2">
-
                                         @if($data->status == 1)
                                             <a href="#" class="btn btn-xs center-block" data-toggle="tooltip" title="Active">
                                                 <span class="glyphicon glyphicon-ok-circle"></span>
@@ -66,7 +64,6 @@
                                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                             </a>
                                         @endif
-
                                     </td>
                                     <td class="col-xs-5 col-sm-4">
                                         <a href="{{url($data->id)}}" class="btn btn-warning btn-xs col-xs-5 col-xs-offset-1 btn_update_user_role" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>
@@ -78,7 +75,7 @@
                         </table>
                         <table style="width: 100%;">
                             <tr>
-                                <td class="col-sm-6 col-xs-8" style="min-width: 200px;">{{ $user_role_datas->render() }}</td>
+                                {{--<td class="col-sm-6 col-xs-8" style="min-width: 200px;">{{ $user_role_datas->render() }}</td>--}}
                                 <td class="col-sm-6 col-xs-8" style="min-width: 100px;">
                                     <form class="form-horizontal pull-right" role="form">
                                         <div class="form-group">
@@ -98,6 +95,8 @@
                         </table>
                     </div>
                 </div>
+                {{-- end list user role --}}
+                {{-- list user --}}
                 <div id="user_list" class="tab-pane fade">
                     <div class="table-responsive" style="padding: 20px 0;">
                         <table class="table table-bordered" style="min-width: 300px;">
@@ -117,7 +116,7 @@
                             @foreach($user_datas as $user_data)
                                 <tr>
                                     <td id="user_id" class="hidden">{{$user_data->id}}</td>
-                                    <td>{{++$j}}</td>
+                                    <td>{{$j++}}</td>
                                     <td>{{$user_data->email}}</td>
                                     <td>{{$user_data->username}}</td>
                                     <td>
@@ -145,7 +144,7 @@
                         </table>
                         <table style="width: 100%;">
                             <tr>
-                                <td class="col-sm-6 col-xs-8" style="min-width: 200px;">{{ $user_datas->render() }}</td>
+                                {{--<td class="col-sm-6 col-xs-8" style="min-width: 200px;">{{ $user_datas->render() }}</td>--}}
                                 <td class="col-sm-6 col-xs-8" style="min-width: 100px;">
                                     <form class="form-horizontal pull-right" role="form">
                                         <div class="form-group">
@@ -165,6 +164,7 @@
                         </table>
                     </div>
                 </div>
+                {{-- end list user --}}
             </div>
         </div>
     </div>
@@ -172,7 +172,7 @@
 
     {{-- add User role --}}
     <div class="row" id="l-add_user_role" style="display: none;">
-        <div class="well" {{--style="position: fixed;"--}}>
+        <div class="well">
             <div class="page-header text-center text-info" style="margin-top: -20px;">
                 <h3>Add User Role</h3>
             </div>
@@ -238,25 +238,25 @@
     {{-- end update user role--}}
 
     {{-- delete user role --}}
-        <div class="row" id="l-delete_user_role" style="display: none;">
-            <div class="well" {{--style="position: fixed;"--}}>
-                <div class="page-header text-center text-info" style="margin-top: -20px;">
-                    <h3>Delete User Role</h3>
-                </div>
-                <form class="form-horizontal" role="form" method="POST" action="{{url('admin/delete_user_role')}}" style="padding: 20px 0;">
-                    {{ csrf_field() }}
-                    <input type="hidden" id="d_user_role_id" name="d_user_role_id" >
-                    <div class="form-group">
-                        <label class="col-sm-12 text-center">Are you sure want to delete this User Role?</label>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <input type="submit" class="btn btn-primary center-block" value="Delete">
-                        </div>
-                    </div>
-                </form>
+    <div class="row" id="l-delete_user_role" style="display: none;">
+        <div class="well" {{--style="position: fixed;"--}}>
+            <div class="page-header text-center text-info" style="margin-top: -20px;">
+                <h3>Delete User Role</h3>
             </div>
+            <form class="form-horizontal" role="form" method="POST" action="{{url('admin/delete_user_role')}}" style="padding: 20px 0;">
+                {{ csrf_field() }}
+                <input type="hidden" id="d_user_role_id" name="d_user_role_id" >
+                <div class="form-group">
+                    <label class="col-sm-12 text-center">Are you sure want to delete this User Role?</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="submit" class="btn btn-primary center-block" value="Delete">
+                    </div>
+                </div>
+            </form>
         </div>
+    </div>
     {{-- end delete user role --}}
 
     {{-- add User --}}

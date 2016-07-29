@@ -17,13 +17,10 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
     <link rel="icon" type="image/png" href="{{asset('images/logo/g2-logo.png')}}" sizes="32x32">
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media="all">
-
     <!-- MetisMenu CSS -->
     <link href="{{asset('backend/bower_components/metisMenu/metisMenu.css')}}" rel="stylesheet" type="text/css" media="all">
-
     <!-- Custom CSS -->
     <link href="{{asset('backend/bower_components/sb-admin/sb-admin-2.css')}}" rel="stylesheet" type="text/css" media="all">
-
     <!-- Custom Fonts -->
     <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
 
@@ -391,14 +388,9 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
     <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">
-            {{-- row --}}
+
             @yield('content')
-            {{--<div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Blank</h1>
-                </div>
-            </div>--}}
-            <!-- /.row -->
+
         </div>
         <!-- /.container-fluid -->
     </div>
@@ -409,15 +401,15 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
 
 <!-- jQuery -->
 <script src="{{asset('jquery/jquery.min.js')}}"></script>
-
 <!-- Bootstrap Core JavaScript -->
 <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
-
 <!-- Metis Menu Plugin JavaScript -->
 <script src="{{asset('backend/bower_components/metisMenu/metisMenu.js')}}"></script>
-
 <!-- Custom Theme JavaScript -->
 <script src="{{asset('backend/bower_components/sb-admin/sb-admin-2.js')}}"></script>
+{{-- Custom own Javascript functions --}}
+<script src="{{asset('backend/js/g2shopping.utilities.js')}}"></script>
+
     @yield('js')
 
 </body>
