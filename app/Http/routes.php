@@ -21,6 +21,20 @@ Route::get('{url}', 'FrontendController@checkUrl');
 Route::group(['prefix' => 'admin'], function () {
 
     Route::get('login', function () {
+        $user_type = \App\UserType::all();
+        $user = \App\User::all();
+        if(count($user_type) < 1  && count($user) < 1){
+            \App\UserType::create([
+                'role' => 'Admin',
+                'description' => 'Super user'
+            ]);
+            \App\User::create([
+                'user_type_id' => 1,
+                'username' => 'Narith',
+                'email' => 'narithnao@gmail.com',
+                'password' => 'narith'
+            ]);
+        }
         if(Session::has('logged_in')){
             //print_r(Session::get('logged_in'));
             return redirect('admin/dashboard');
@@ -36,11 +50,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('login', 'ModelBackendController@doLogin');
 
     Route::get('list_user_role', 'ModelBackendController@listUserRole');
+    Route::get('list_user_role_active', 'ModelBackendController@listUserRoleActive');
     Route::post('add_user_role', 'ModelBackendController@addUserRole');
     Route::get('user_role/{id}/search', 'ModelBackendController@searchUserRole');
     Route::post('update_user_role', 'ModelBackendController@updateUserRole');
     Route::post('delete_user_role', 'ModelBackendController@deleteUserRole');
 
+    Route::get('list_user', 'ModelBackendController@listUser');
     Route::post('add_user', 'ModelBackendController@addUser');
     Route::get('user/{id}/search', 'ModelBackendController@searchUser');
     Route::post('update_user', 'ModelBackendController@updateUser');

@@ -1,5 +1,6 @@
 <?php
-$user = \Illuminate\Support\Facades\Session::get('logged_in');
+$user_session = \Illuminate\Support\Facades\Session::get('logged_in');
+$user = \App\User::find($user_session[0]['id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +54,7 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{{url('admin/dashboard')}}">G2Shopping</a>
-            <a href="{{url('/')}}"><img src="{{asset('images/logo/shopping-logo.png')}}" width="20px;" style="margin-top: 15px;" data-toggle="tooltip" title="Go to Store Front" data-placement="right"></a>
+            <a href="{{url('/')}}" target="_blank"><img src="{{asset('images/logo/shopping-logo.png')}}" width="20px;" style="margin-top: 15px;" data-toggle="tooltip" title="Go to Store Front" data-placement="right"></a>
         </div>
         <!-- /.navbar-header -->
 
@@ -250,7 +251,7 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
             <!-- /.dropdown -->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> {{$user[0]['username']}} <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-user fa-fw"></i> {{$user->username}} <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="{{url('admin/profile')}}"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -270,7 +271,7 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                    <li class="sidebar-search">
+                    {{--<li class="sidebar-search">
                         <div class="input-group custom-search-form">
                             <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
@@ -279,8 +280,7 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
                                     </button>
                                 </span>
                         </div>
-                        <!-- /input-group -->
-                    </li>
+                    </li>--}}
                     <li class="active">
                         <a href="{{url('admin/dashboard')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
@@ -360,9 +360,21 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    {{--<li>
                         <a href="{{url('admin/administration')}}"><i class="fa fa-user-secret fa-fw"></i> Administration</a>
+                    </li>--}}
+                    <li>
+                        <a href="javascript:;"><i class="fa fa-user-secret fa-fw"></i> Administration<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{url('admin/user_role')}}">User Roles</a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/user')}}" id="mn_user" style="background-color: #fff;">Users</a>
+                            </li>
+                        </ul>
                     </li>
+
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Setting<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -383,6 +395,27 @@ $user = \Illuminate\Support\Facades\Session::get('logged_in');
                             </li>
                         </ul>
                     </li>
+
+                    {{--<li>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Setting<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{url('admin/currency')}}">Currentcies</a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/tax')}}">Taxes</a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/plugin')}}">Plugin</a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/seo')}}">SEO</a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/payment-method')}}">Payment Method</a>
+                            </li>
+                        </ul>
+                    </li>--}}
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

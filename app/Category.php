@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $fillable = [
-        'cate_name', 'cate_description', 'cate_image', 'parent_category', 'show_on_homepage', 'include_on_main_menu', 'position', 'status'
+        'cate_name', 'cate_description', 'cate_image', 'parent_category', 'show_on_homepage', 'include_on_main_menu', 'position'
     ];
 
-    /*public function users(){
-        return $this->hasMany(User::class);
-    }*/
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_category');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_category');
+    }
 }

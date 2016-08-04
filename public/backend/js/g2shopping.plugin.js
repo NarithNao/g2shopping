@@ -14,22 +14,16 @@ plugin.popup.fail = function (title, content){
     $.toaster({ priority : 'danger', title : 'Title', message : 'Your message here'});
 };
 
-plugin.loadingStart = function (element) {
-    // none, bounce, rotateplane, stretch, orbit,
-    // roundBounce, win8, win8_linear or ios
-
-    $(element).waitMe({
-        effect: 'bounce',
-        text: 'Please wait...',
-        bg: 'rgba(255,255,255,0.7)',
-        color: '#000',
-        maxSize: '',
-        source: 'img.svg',
-        onClose: function() {}
+plugin.startLoading = function (element) {
+    $(document).ajaxStart(function(){
+        $("#loading_page").hasClass('hidden')?$("#loading_page").removeClass('hidden'):'';
+        $(element+" > a").click();
     });
 };
 
-plugin.loadingStop = function (element) {
-    $(element).waitMe('hide');
+plugin.endLoading = function (element) {
+    $(document).ajaxStop(function(){
+        $("#loading_page").hasClass('hidden')?'':$("#loading_page").addClass('hidden');
+        $(element+" > a").click();
+    });
 };
-

@@ -35,6 +35,9 @@ class FrontendController extends Controller
             case 'wishlist':
                 return view('frontends/wishlist');
                 break;
+            case 'admin':
+                return redirect('admin/login');
+                break;
             default:
                 return view('frontends/404');
         }

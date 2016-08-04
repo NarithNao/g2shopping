@@ -42,25 +42,31 @@ class ModelBackendController extends Controller
         return $userType->all();
     }
 
+    public function listUserRoleActive(Request $request, UserType $userType){
+        if(!$request->ajax()){
+            return redirect('admin/page-not-found');
+        }
+        return $userType->where('status', 1)->get();
+    }
+
     public function addUserRole(Request $request, UserType $userType){
         $data = array(
-            'role' => $request->a_user_role,
-            'description' => $request->a_description
+            'role' => $request->user_role,
+            'description' => $request->description
         );
-        $userType->create($data);
-        return back();
+        $insert = $userType->create($data);
+        return json_encode($insert);
     }
 
     public function searchUserRole($id, Request $request, UserType $userType){
         if(!$request->ajax()){
             return redirect('admin/page-not-found');
         }
-        $datas = $userType->find($id);
+        $datas = $userType->findOrFail($id);
         return $datas;
     }
 
     public function updateUserRole(Request $request, UserType $userType){
-
         $data = $userType->find($request->user_role_id);
         $data->role = $request->user_role;
         $data->description = $request->description;
@@ -69,45 +75,43 @@ class ModelBackendController extends Controller
         else
             $data->status = 0;
         $update = $data->save();
-        /*if(!$update){
-            $res['title'] = 'Update User Role';
-            $res['content'] = 'Update';
-        }*/
         return json_encode($update);
     }
 
     public function deleteUserRole(Request $request, UserType $userType){
-        $data = $userType->find($request->d_user_role_id);
-        $data->delete();
-        return back();
+        $data = $userType->find($request->user_role_id);
+        $delete = $data->delete();
+        return json_encode($delete);
+    }
+
+    public function listUser(Request $request, User $user){
+        if(!$request->ajax()){
+            return redirect('admin/page-not-found');
+        }
+        return $user->all();
     }
 
     public function addUser(Request $request, User $user){
-        //$user_type = UserType::find();
-        $newsletter = intval($request->a_user_newsletter);
-        if($request->a_user_user_role == 'Admin'){
-            $user_type_id = 1;
-        }else{
-            $user_type_id = 2;
-        }
-        if($request->a_user_newsletter == null)
-            $newsletter = 0;
+        $newsletter = intval($request->newsletter);
+        $user_role_id = intval($request->user_role_id);
+        if($request->newsletter == null) $newsletter = 0;
+        if($request->user_role_id == null) $user_role_id = 2; //set default to guest
         $data = array(
-            'user_type_id'  =>  $user_type_id,
-            'username'      =>  $request->a_user_username,
-            'email'         =>  $request->a_user_email,
-            'password'      =>  $request->a_user_pwd,
-            'firstname'     =>  $request->a_user_firstname,
-            'lastname'      =>  $request->a_user_lastname,
-            'country'       =>  $request->a_user_country,
-            'city'          =>  $request->a_user_city,
-            'address'       =>  $request->a_user_address,
-            'phone'         =>  $request->a_user_phone,
+            'user_type_id'  =>  $user_role_id,
+            'username'      =>  $request->username,
+            'email'         =>  $request->email,
+            'password'      =>  $request->password,
+            'firstname'     =>  $request->firstname,
+            'lastname'      =>  $request->lastname,
+            'country'       =>  $request->country,
+            'city'          =>  $request->city,
+            'address'       =>  $request->address,
+            'phone'         =>  $request->phone,
             'newsletter'    =>  $newsletter,
         );
-        $user->create($data);
-
-        return back();
+        $insert = $user->create($data);
+        return json_encode($insert);
+//        return json_encode($data);
     }
 
     public function searchUser($id,Request $request, User $user){
@@ -119,28 +123,25 @@ class ModelBackendController extends Controller
     }
 
     public function updateUser(Request $request, User $user){
-        $data = $user->find($request->u_user_id);
-        $newsletter = intval($request->u_user_newsletter);
-        $status = intval($request->u_user_status);
-        if($request->u_user_newsletter == null) $newsletter = 0;
-        if($request->u_user_status == null) $status = 0;
-        if($request->u_user_user_role == 'Admin')
-            $data->user_type_id = 1;
-        else
-            $data->user_type_id = 2;
-        $data->username     = $request->u_user_username;
-        //$data->email        = $request->u_user_email;
-        $data->firstname    = $request->u_user_firstname;
-        $data->lastname     = $request->u_user_lastname;
-        $data->country      = $request->u_user_country;
-        $data->city         = $request->u_user_city;
-        $data->address      = $request->u_user_address;
-        $data->phone        = $request->u_user_phone;
+        $data = $user->find($request->user_id);
+        $newsletter = intval($request->newsletter);
+        $status = intval($request->status);
+        $user_role_id = intval($request->user_role_id);
+        if($request->newsletter == null) $newsletter = 0;
+        if($request->status == null) $status = 0;
+        if($request->user_role_id == null) $user_role_id = 2;
+        $data->user_type_id = $user_role_id;
+        $data->username     = $request->username;
+        $data->firstname    = $request->firstname;
+        $data->lastname     = $request->lastname;
+        $data->country      = $request->country;
+        $data->city         = $request->city;
+        $data->address      = $request->address;
+        $data->phone        = $request->phone;
         $data->newsletter   = $newsletter;
         $data->status       = $status;
-        $data->save();
-
-        return back();
+        $update = $data->save();
+        return json_encode($update);
     }
 
     public function updateUserInfo(Request $request, User $user){
