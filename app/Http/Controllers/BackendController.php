@@ -53,6 +53,8 @@ class BackendController extends Controller
                 break;
             case 'dashboard':
                 return view('backends/index');
+            case 'update_category':
+                return view('backends/iframe/update_category');
             case 'page-not-found':
                 return view('frontends/404');
                 break;

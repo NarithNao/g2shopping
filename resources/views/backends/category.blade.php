@@ -58,8 +58,8 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{url($category->id)}}" class="btn btn-warning btn-xs col-xs-5 col-xs-offset-1 btn_update_category" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>
-                            <a href="{{url($category->id)}}" class="btn btn-danger btn-xs col-xs-5 col-xs-offset-1 btn_delete_category" data-toggle="tooltip" title="Delete"><i class="fa fa-times"></i></a>
+                            <a href="{{url($category->id)}}" class="btn btn-warning btn-xs col-xs-10 col-xs-offset-1 btn_update_category" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>
+                            {{--<a href="{{url($category->id)}}" class="btn btn-danger btn-xs col-xs-5 col-xs-offset-1 btn_delete_category" data-toggle="tooltip" title="Delete"><i class="fa fa-times"></i></a>--}}
                         </td>
                     </tr>
                     @endforeach
@@ -138,7 +138,8 @@
     {{-- end add category --}}
 
     {{-- update category --}}
-    <div class="row" id="l-update_category1" style="display: none;">
+    <div class="row" id="l-update_category" style="display: none;">
+        <iframe id="l-update_category" style="width: 100%; height: 500px; border: 1px solid #ccc; border-radius: 5px; background-color: #eee; overflow-y: hidden;" src="{{url('admin/update_category')}}"></iframe>
         {{--<div class="well">
             <div class="page-header text-center text-info" style="margin-top: -20px;">
                 <h3>Update Category</h3>

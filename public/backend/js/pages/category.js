@@ -102,7 +102,7 @@ $(document).ready(function () {
         $("#category").show();
     });
 
-    $(".btn_delete_category").click(function (e) {
+    /*$(".btn_delete_category").click(function (e) {
         e.preventDefault();
 
         var id = g2shopping.getLinkID(this.href)
@@ -116,14 +116,19 @@ $(document).ready(function () {
             $("#d_cate_id").val(result.id);
         });
 
-    });
+    });*/
 
     $(".btn_update_category").click(function (e) {
         e.preventDefault();
         var id = g2shopping.getLinkID(this.href)
         var url = '/admin/category/'+id+'/search';
 
-        g2shopping.jsGetReq(url, function(result){
+        $("#category").hide();
+        $("#b-add_category").hide();
+        $("#b-cancel").removeClass('hidden');
+        $("#l-update_category").show();
+
+        /*g2shopping.jsGetReq(url, function(result){
             $("#category").hide();
             $("#b-add_category").hide();
             $("#b-cancel").removeClass('hidden');
@@ -148,7 +153,7 @@ $(document).ready(function () {
             }else
                 $("#u_status").val('0');
             $("#u_position").val(result.position);
-        });
+        });*/
 
     });
 
