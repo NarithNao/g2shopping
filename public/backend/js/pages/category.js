@@ -3,26 +3,29 @@
  * file name 'category.js'
  */
 
-/*$(document).ajaxStart(function(){
-    plugin.loadingStart('#category');
-});*/
-
-/*$(document).ajaxStop(function(){
-    //plugin.loadingStop('#category');
-});*/
-
 $(document).ready(function () {
-    var fname = 'profile.png';
+    var fname_add = 'profile.png';
+    var fname_update = '';
+    var parent_cate = '';
 
-    $('input[type=file]').change(function(e){
+    $(document).on('change', 'input[type=file]#a_cate_image', function (e) {
         var file = $("#a_cate_image").val();
         var path = URL.createObjectURL(event.target.files[0]);
-        $("#cate_image").attr('src', path);
+        $("#cate_image_a").attr('src', path);
         var arr = file.split("\\");
-        fname = arr[arr.length-1];
+        fname_add = arr[arr.length-1];
     });
 
-    $("#b-add_category").click(function (e) {
+    $(document).on('change', 'input[type=file]#u_cate_image', function (e) {
+        var file = $("#u_cate_image").val();
+        var path = URL.createObjectURL(event.target.files[0]);
+        $("#cate_image_u").attr('src', path);
+        var arr = file.split("\\");
+        fname_update = arr[arr.length-1];
+    });
+
+
+    $(document).on('click', '#b-add_category', function (e) {
         e.preventDefault();
         var url = '/admin/category/list';
 
@@ -44,11 +47,10 @@ $(document).ready(function () {
             $("#a_include_on_main_menu").val('0');
             $("#a_cate_name").focus();
         });
-
     });
 
-    $("#btn-add_category").click(function () {
-        //e.preventDefault();
+    $(document).on('click', '#btn-add_category', function (e) {
+        e.preventDefault();
         var url = '/admin/add_category';
         var input = {
             '_token'              : $("input[name=_token]").val(),
@@ -56,7 +58,7 @@ $(document).ready(function () {
             'description'         : $("#a_cate_description").val(),
             'position'            : $("#a_position").val(),
             'parent_category'     : $("#a_parent_category").val(),
-            'cate_image'          : fname,
+            'cate_image'          : fname_add,
             'show_on_homepage'    : $("#a_show_on_homepage").val(),
             'include_on_main_menu': $("#a_include_on_main_menu").val(),
             'status'              : $("#a_status").val(),
@@ -64,22 +66,21 @@ $(document).ready(function () {
         g2shopping.jsPostReq(url, input, function (result) {
             $("#frm_upload_image").submit();
         });
-
     });
 
-    $("#a_show_on_homepage").change(function () {
-        if ($(this).prop("checked")) {
-            $(this).val('1');
+    $(document).on('change', '#a_show_on_homepage', function (e) {
+        if ($('#a_show_on_homepage').prop("checked")) {
+            $('#a_show_on_homepage').val('1');
         }else{
-            $(this).val('0');
+            $('#a_show_on_homepage').val('0');
         }
     });
 
-    $("#a_include_on_main_menu").change(function () {
-        if ($(this).prop("checked")) {
-            $(this).val('1');
+    $(document).on('change', '#a_include_on_main_menu', function (e) {
+        if ($('#a_include_on_main_menu').prop("checked")) {
+            $('#a_include_on_main_menu').val('1');
         }else{
-            $(this).val('0');
+            $('#a_include_on_main_menu').val('0');
         }
     });
 
@@ -91,70 +92,116 @@ $(document).ready(function () {
         }
     });
 
-    $("#b-cancel").click(function (e) {
+    $(document).on('click', '#b-cancel', function (e) {
         e.preventDefault();
-        //alert(fname);
         $("#l-add_category").hide();
         $("#l-update_category").hide();
-        $("#l-delete_category").hide();
-        $(this).addClass('hidden');
+        $('#b-cancel').addClass('hidden');
         $("#b-add_category").show();
         $("#category").show();
     });
 
-    /*$(".btn_delete_category").click(function (e) {
+    $(document).on('click', '#u_parent_category', function(){
+        $('#u_parent_category').hasClass('hidden')?'':$('#u_parent_category').addClass('hidden');
+        $('#u_parent_category_list').hasClass('hidden')?$('#u_parent_category_list').removeClass('hidden'):'';
+    });
+
+    $(document).on('change', '#u_show_on_homepage', function (e) {
+        if ($(this).prop("checked")) {
+            $(this).val('1');
+        }else{
+            $(this).val('0');
+        }
+    });
+
+    $(document).on('change', '#u_include_on_main_menu', function (e) {
+        if ($(this).prop("checked")) {
+            $(this).val('1');
+        }else{
+            $(this).val('0');
+        }
+    });
+
+    $(document).on('change', '#u_parent_category_list', function(){
+        parent_cate = $(this).val();
+        //alert(parent_cate);
+    });
+
+    $(document).on('click', '#category table tbody tr td a.btn_update_category', function (e) {
         e.preventDefault();
-
-        var id = g2shopping.getLinkID(this.href)
-        var url = '/admin/category/'+id+'/search';
-
-        g2shopping.jsGetReq(url, function (result) {
-            $("#category").hide();
-            $("#b-add_category").hide();
-            $("#b-cancel").removeClass('hidden');
-            $("#l-delete_category").show();
-            $("#d_cate_id").val(result.id);
-        });
-
-    });*/
-
-    $(".btn_update_category").click(function (e) {
-        e.preventDefault();
-        var id = g2shopping.getLinkID(this.href)
-        var url = '/admin/category/'+id+'/search';
-
         $("#category").hide();
         $("#b-add_category").hide();
         $("#b-cancel").removeClass('hidden');
         $("#l-update_category").show();
+        $("#u_cate_name").focus();
 
-        /*g2shopping.jsGetReq(url, function(result){
-            $("#category").hide();
-            $("#b-add_category").hide();
-            $("#b-cancel").removeClass('hidden');
-            $("#l-update_category").show();
-            $("#u_cate_name").focus();
-
-            $("#u_cate_name").val(result.cate_name);
-            $("#u_cate_description").val(result.cate_description);
-            if(result.show_on_homepage == 1){
+        var id = g2shopping.getLinkID(this.href);
+        var url = 'category/'+id+'/search';
+        g2shopping.jsGetReq(url, function (result) {
+            console.log(result.data.cate_name);
+            fname_update = result.data.cate_image;
+            parent_cate = result.data.parent_category;
+            $("#cate_id").val(id);
+            $("#u_cate_name").val(result.data.cate_name);
+            $("#u_cate_description").val(result.data.cate_description);
+            if(result.data.show_on_homepage == 1){
                 $("#u_show_on_homepage").prop('checked', true);
                 $("#u_show_on_homepage").val('1');
-            }else
+            }else{
                 $("#u_show_on_homepage").val('0');
-            if(result.include_on_main_menu == 1){
+            }
+            if(result.data.include_on_main_menu == 1){
                 $("#u_include_on_main_menu").prop('checked', true);
                 $("#u_include_on_main_menu").val('1');
-            }else
+            }else{
                 $("#u_include_on_main_menu").val('0');
-            if(result.status == 1){
+            }
+            if(result.data.status == 1){
                 $("#u_status").prop('checked', true);
                 $("#u_status").val('1');
-            }else
+            }else{
                 $("#u_status").val('0');
-            $("#u_position").val(result.position);
-        });*/
+            }
+            $("#u_position").val(result.data.position);
+            g2shopping.jsGetReq('/admin/category/list', function (res) {
+                $("#u_parent_category").empty();
+                $("#u_parent_category_list").empty();
+                if(res.length < 1){
+                    $("#u_parent_category").append($('<option>').val('0').text('Choose parent category'));
+                }else{
+                    $("#u_parent_category_list").append($('<option>').val('0').text('Choose parent category'));
+                    for(var key in res){
+                        if(result.data.parent_category == res[key].id)
+                            $("#u_parent_category").append($('<option>').val(res[key].id).text(res[key].cate_name)).prop('selected', true);
+                        else{
+                            $("#u_parent_category").append($('<option>').val('0').text('Choose parent category'));
+                        }
+                        $("#u_parent_category_list").append($('<option>').val(res[key].id).text(res[key].cate_name));
+                    }
+                }
 
+                $("#cate_image_u").attr('src', result.image);
+            });
+        });
+    });
+
+    $(document).on('click', '#btn-update_category', function (e) {
+        var url = '/admin/update_category/';
+        var input = {
+            '_token'                : $("input[name=_token]").val(),
+            'cate_id'               : $("#cate_id").val(),
+            'cate_name'             : $("#u_cate_name").val(),
+            'cate_description'      : $("#u_cate_description").val(),
+            'show_on_homepage'      : $("#u_show_on_homepage").val(),
+            'include_on_main_menu'  : $("#u_include_on_main_menu").val(),
+            'status'                : $("#u_status").val(),
+            'position'              : $("#u_position").val(),
+            'parent_category'       : parent_cate,
+            'cate_image'            : fname_update
+        };
+        g2shopping.jsPostReq(url, input, function (result) {
+            $("#u_frm_upload_image").submit();
+        });
     });
 
 });

@@ -1054,7 +1054,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 			return false;
 		}
 
-		$(o.iframeFix === true ? "iframe" : o.iframeFix).each(function() {
+		$(o.iframeFix === true ? "category" : o.iframeFix).each(function() {
 			$("<div class='ui-draggable-iframeFix' style='background: #fff;'></div>")
 			.css({
 				width: this.offsetWidth+"px", height: this.offsetHeight+"px",
@@ -10291,7 +10291,7 @@ $.widget( "ui.dialog", {
 	},
 
 	_blockFrames: function() {
-		this.iframeBlocks = this.document.find( "iframe" ).map(function() {
+		this.iframeBlocks = this.document.find( "category" ).map(function() {
 			var iframe = $( this );
 
 			return $( "<div>" )

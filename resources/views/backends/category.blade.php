@@ -59,7 +59,6 @@
                         </td>
                         <td>
                             <a href="{{url($category->id)}}" class="btn btn-warning btn-xs col-xs-10 col-xs-offset-1 btn_update_category" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>
-                            {{--<a href="{{url($category->id)}}" class="btn btn-danger btn-xs col-xs-5 col-xs-offset-1 btn_delete_category" data-toggle="tooltip" title="Delete"><i class="fa fa-times"></i></a>--}}
                         </td>
                     </tr>
                     @endforeach
@@ -122,7 +121,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <img id="cate_image" src="{{asset('images/profile/img.png')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
+                            <img id="cate_image_a" src="{{asset('images/profile/img.png')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
                             <input type="file" name="a_cate_image" id="a_cate_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
                         </div>
                     </div>
@@ -139,13 +138,13 @@
 
     {{-- update category --}}
     <div class="row" id="l-update_category" style="display: none;">
-        <iframe id="l-update_category" style="width: 100%; height: 500px; border: 1px solid #ccc; border-radius: 5px; background-color: #eee; overflow-y: hidden;" src="{{url('admin/update_category')}}"></iframe>
-        {{--<div class="well">
+        <div class="well">
             <div class="page-header text-center text-info" style="margin-top: -20px;">
                 <h3>Update Category</h3>
             </div>
-            <form class="form-horizontal" id="u_frm_upload_image" role="form" method="POST" action="{{url('admin/upload_category_image')}}" enctype="multipart/form-data" style="padding: 20px 0;">
+            <form class="form-horizontal" id="u_frm_upload_image" role="form" method="POST" action="{{url('admin/update_category_image')}}" enctype="multipart/form-data" style="padding: 20px 0;">
                 {{ csrf_field() }}
+                <input type="hidden" id="cate_id">
                 <div class="col-sm-8">
                     <div class="form-group">
                         <label class="col-sm-4 text-left" for="u_cate_name">Category name:</label>
@@ -188,19 +187,20 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <label class="text-left" for="u_parent_category">Parent Category:</label>
-                            <select class="form-control" id="u_parent_category" name="u_parent_category">
-                                --}}{{--<option>1</option>
-                                <option>2</option>--}}{{--
-                            </select>
+                            <select class="form-control" id="u_parent_category" name="u_parent_category"></select>
+                        </div>
+                        <div class="col-sm-12">
+                            <select class="form-control hidden" id="u_parent_category_list" name="u_parent_category"></select>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <div class="col-sm-12" id="u_cate_image">
-                            --}}{{--<label class="text-left" for="a_cate_image">Image:</label>--}}{{--
-                            <img id="cate_image" src="{{asset('images/profile/img.png')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
-                            <input type="file" name="a_cate_image" id="a_cate_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
+                        <div class="col-sm-12" id="loading_image">
+                            <img id="cate_image_u" src="" class="img-thumbnail" alt="Cinque Terre" width="200px">
+                            <input type="file" name="u_cate_image" id="u_cate_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
                         </div>
                     </div>
+
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12 text-center">
@@ -208,32 +208,9 @@
                     </div>
                 </div>
             </form>
-        </div>--}}
-    </div>
-    {{--<iframe id="l-update_category"></iframe>--}}
-    {{-- end update category --}}
-
-    {{-- delete category --}}
-    <div class="row" id="l-delete_category" style="display: none;">
-        <div class="well" {{--style="position: fixed;"--}}>
-            <div class="page-header text-center text-info" style="margin-top: -20px;">
-                <h3>Delete Category</h3>
-            </div>
-            <form class="form-horizontal" role="form" method="POST" action="{{url('admin/delete_category')}}" style="padding: 20px 0;">
-                {{ csrf_field() }}
-                <input type="hidden" id="d_cate_id" name="d_cate_id" >
-                <div class="form-group">
-                    <label class="col-sm-12 text-center">Are you sure want to delete this Category?</label>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <input type="submit" class="btn btn-primary center-block" value="Delete">
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
-    {{-- end delete category --}}
+    {{-- end update category --}}
 
 @endsection
 

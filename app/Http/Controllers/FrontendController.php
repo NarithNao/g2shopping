@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -12,7 +13,8 @@ class FrontendController extends Controller
     public function checkUrl($url){
         switch($url){
             case 'index':
-                return view('frontends/index');
+                $cates = Category::where('status', 1)->where('include_on_main_menu', 1)->get();
+                return view('frontends/index', compact('cates'));
                 break;
             case 'checkout':
                 return view('frontends/checkout');

@@ -13,7 +13,7 @@
 use Illuminate\Support\Facades\Session;
 
 Route::get('/', function () {
-    return view('frontends.index');
+    return redirect('index');
 });
 
 Route::get('{url}', 'FrontendController@checkUrl');
@@ -66,7 +66,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('add_category', 'ModelBackendController@addCategory');
     Route::post('add_category_image', 'ModelBackendController@addCategoryImage');
     Route::get('category/{id}/search', 'ModelBackendController@searchCategory');
-    Route::post('delete_category', 'ModelBackendController@deleteCategory');
+    Route::post('update_category', 'ModelBackendController@updateCategory');
+    Route::post('update_category_image', 'ModelBackendController@updateCategoryImage');
+
+    Route::post('add_brand', 'ModelBackendController@addBrand');
+    Route::post('add_brand_image', 'ModelBackendController@addBrandImage');
+    Route::get('brand/{id}/search', 'ModelBackendController@searchBrand');
+    Route::post('update_brand', 'ModelBackendController@updateBrand');
+    Route::post('update_brand_image', 'ModelBackendController@updateBrandImage');
 
     Route::get('{url}', 'BackendController@checkUrl');
 

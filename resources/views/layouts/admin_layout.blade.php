@@ -1,5 +1,11 @@
 <?php
 $user_session = \Illuminate\Support\Facades\Session::get('logged_in');
+$users = App\User::all();
+if(count($users) <= 0){
+    \Illuminate\Support\Facades\Session::forget('logged_in');
+    return redirect('admin/login');
+}
+
 $user = \App\User::find($user_session[0]['id']);
 ?>
 <!DOCTYPE html>

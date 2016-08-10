@@ -1563,14 +1563,14 @@ $.magnificPopup.registerModule('zoom', {
 
 /*>>zoom*/
 
-/*>>iframe*/
+/*>>category*/
 
-var IFRAME_NS = 'iframe',
+var IFRAME_NS = 'category',
 	_emptyPage = '//about:blank',
 	
 	_fixIframeBugs = function(isShowing) {
 		if(mfp.currTemplate[IFRAME_NS]) {
-			var el = mfp.currTemplate[IFRAME_NS].find('iframe');
+			var el = mfp.currTemplate[IFRAME_NS].find('category');
 			if(el.length) { 
 				// reset src after the popup is closed to avoid "video keeps playing after popup is closed" bug
 				if(!isShowing) {
@@ -1588,9 +1588,9 @@ var IFRAME_NS = 'iframe',
 $.magnificPopup.registerModule(IFRAME_NS, {
 
 	options: {
-		markup: '<div class="mfp-iframe-scaler">'+
+		markup: '<div class="mfp-category-scaler">'+
 					'<div class="mfp-close"></div>'+
-					'<iframe class="mfp-iframe" src="//about:blank" frameborder="0" allowfullscreen></iframe>'+
+					'<category class="mfp-category" src="//about:blank" frameborder="0" allowfullscreen></category>'+
 				'</div>',
 
 		srcAction: 'iframe_src',
@@ -1621,12 +1621,12 @@ $.magnificPopup.registerModule(IFRAME_NS, {
 			_mfpOn('BeforeChange', function(e, prevType, newType) {
 				if(prevType !== newType) {
 					if(prevType === IFRAME_NS) {
-						_fixIframeBugs(); // iframe if removed
+						_fixIframeBugs(); // category if removed
 					} else if(newType === IFRAME_NS) {
-						_fixIframeBugs(true); // iframe is showing
+						_fixIframeBugs(true); // category is showing
 					} 
 				}// else {
-					// iframe source is switched, don't do anything
+					// category source is switched, don't do anything
 				//}
 			});
 
@@ -1668,7 +1668,7 @@ $.magnificPopup.registerModule(IFRAME_NS, {
 
 
 
-/*>>iframe*/
+/*>>category*/
 
 /*>>gallery*/
 /**

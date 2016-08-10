@@ -104,10 +104,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                         <ul class="nav navbar-nav nav_1">
                             <li><a class="color" href="{{url('index')}}">Home</a></li>
-
+                            @foreach($cates as $cate)
                             <li class="dropdown mega-dropdown active">
-                                <a class="color1" href="#" class="dropdown-toggle" data-toggle="dropdown">Women<span class="caret"></span></a>
-                                <div class="dropdown-menu ">
+                                <a class="color1" href="#" class="dropdown-toggle" data-toggle="dropdown">{{$cate->cate_name}}<span class="caret"></span></a>
+
+                                {{--<div class="dropdown-menu ">
                                     <div class="menu-top">
                                         <div class="col1">
                                             <div class="h_nav">
@@ -167,8 +168,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                </div>
+                                </div>--}}
+
                             </li>
+                            @endforeach
                             <li><a class="color3" href="{{url('checkout')}}">Checkout</a></li>
                             {{--<li><a class="color6" href="{{url('logout')}}">Logout</a></li>--}}
                         </ul>

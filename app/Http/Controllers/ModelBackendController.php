@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use App\Category;
 use App\User;
 use App\UserType;
@@ -195,7 +196,11 @@ class ModelBackendController extends Controller
 
     public function searchCategory($id, Category $category){
         $cate = $category->find($id);
-        return $cate;
+        $path = 'images/category/'.$cate->cate_image;
+        return response()->json([
+            'data' => $cate,
+            'image' => asset($path)
+        ]);
     }
 
     public function deleteCategory(Request $request, Category $category){
@@ -204,8 +209,85 @@ class ModelBackendController extends Controller
         $image_path = 'images/category/'.$cate->cate_image;
         Storage::disk('public1')->delete($image_path);
         $cate->delete();
-
         return back();
+    }
+
+    public function updateCategory(Request $request, Category $category){
+        $cate = $category->find($request->cate_id);
+        $cate->cate_name = $request->cate_name;
+        $cate->cate_description = $request->cate_description;
+        $cate->cate_image = $request->cate_image;
+        $cate->parent_category = intval($request->parent_category);
+        $cate->show_on_homepage = intval($request->show_on_homepage);
+        $cate->include_on_main_menu = intval($request->include_on_main_menu);
+        $cate->position = intval($request->position);
+        $cate->status = intval($request->status);
+        $status = $cate->save();
+        return json_encode($status);
+    }
+
+    public function updateCategoryImage(Request $request){
+        $path = base_path() . '\public\images\category';
+        if($request->hasFile('u_cate_image')){
+            $request->file('u_cate_image')->move($path, $request->file('u_cate_image')->getClientOriginalName());
+            return back();
+        }else
+            return back();
+    }
+
+    public function addBrand(Request $request, Brand $brand){
+        $data = array(
+            'brand_name'             =>  $request->brand_name,
+            'brand_description'      =>  $request->brand_description,
+            'brand_image'            =>  $request->brand_image,
+            'position'              =>  intval($request->position),
+        );
+        $status = $brand->create($data);
+        return json_encode($status);
+        //return $data;
+    }
+
+    public function addBrandImage(Request $request){
+        //$img = $request->file('a_cate_image');
+        $path = base_path() . '\public\images\brand';
+        if($request->hasFile('a_brand_image')){
+            $request->file('a_brand_image')->move($path, $request->file('a_brand_image')->getClientOriginalName());
+            return back();
+        }
+        else
+            echo "<script>alert('Upload image failed.'); history.back();</script>";
+    }
+
+    public function searchBrand($id, Brand $brand){
+        $bran = $brand->find($id);
+        $path = 'images/brand/'.$bran->brand_image;
+        return response()->json([
+            'data' => $bran,
+            'image' => asset($path)
+        ]);
+    }
+
+    public function updateBrand(Request $request, Brand $brand){
+        $bran = $brand->find($request->brand_id);
+
+        $bran->brand_name = $request->brand_name;
+        $bran->brand_description = $request->brand_description;
+        $bran->brand_image = $request->brand_image;
+        $bran->position = intval($request->position);
+        $bran->status = intval($request->status);
+
+        $status = $bran->save();
+        return json_encode($status);
+        //return $bran;
+    }
+
+    public function updateBrandImage(Request $request){
+        $path = base_path() . '\public\images\brand';
+        if($request->hasFile('u_brand_image')){
+            $request->file('u_brand_image')->move($path, $request->file('u_brand_image')->getClientOriginalName());
+            return back();
+        }else
+            return back();
     }
 
 }

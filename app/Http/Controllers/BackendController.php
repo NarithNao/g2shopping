@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use App\Category;
 use App\User;
 use App\UserType;
@@ -53,8 +54,10 @@ class BackendController extends Controller
                 break;
             case 'dashboard':
                 return view('backends/index');
-            case 'update_category':
-                return view('backends/iframe/update_category');
+            case 'manufacturer':
+                $brands = Brand::all();
+                $i = 1;
+                return view('backends/brand', compact('brands', 'i'));
             case 'page-not-found':
                 return view('frontends/404');
                 break;
