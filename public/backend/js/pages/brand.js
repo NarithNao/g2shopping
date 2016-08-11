@@ -4,7 +4,7 @@
  */
 
 $(document).ready(function () {
-    var fname_add = 'profile.png';
+    var fname_add = 'no_image.gif';
     var fname_update = '';
 
     $(document).on('change', 'input[type=file]#a_brand_image', function (e) {
