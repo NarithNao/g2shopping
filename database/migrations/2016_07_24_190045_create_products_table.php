@@ -21,7 +21,6 @@ class CreateProductsTable extends Migration
             $table->double('price');
             $table->integer('instock');
             $table->integer('instock_min');
-            $table->tinyInteger('status')->default(1);
 
             $table->Integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
@@ -32,6 +31,7 @@ class CreateProductsTable extends Migration
             $table->Integer('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade')->onUpdate('cascade');
 
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
 
         });

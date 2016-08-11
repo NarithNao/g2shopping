@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->string('cate_name', 100);
             $table->string('cate_description', 200);
             $table->string('cate_image', 200);
-            $table->tinyInteger('parent_category');
+            $table->Integer('parent_category');
             $table->tinyInteger('show_on_homepage');
             $table->tinyInteger('include_on_main_menu');
             $table->tinyInteger('position');
