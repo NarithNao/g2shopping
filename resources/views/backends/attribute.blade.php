@@ -101,7 +101,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <img id="brand_image_a" src="{{asset('images/profile/img.png')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
+                            <img id="brand_image_a" src="{{asset('images/no_image.gif')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
                             <input type="file" name="a_brand_image" id="a_brand_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
                         </div>
                     </div>
