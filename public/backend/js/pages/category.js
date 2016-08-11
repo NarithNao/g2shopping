@@ -4,7 +4,7 @@
  */
 
 $(document).ready(function () {
-    var fname_add = 'profile.png';
+    var fname_add = 'no_image.gif';
     var fname_update = '';
     var parent_cate = '';
 
@@ -163,11 +163,13 @@ $(document).ready(function () {
                 $("#u_status").val('0');
             }
             $("#u_position").val(result.data.position);
-            g2shopping.jsGetReq('/admin/category/list', function (res) {
+
+            g2shopping.jsPostReq('/admin/category/list_update', {'cate_id': id}, function (res) {
                 $("#u_parent_category").empty();
                 $("#u_parent_category_list").empty();
                 if(res.length < 1){
                     $("#u_parent_category").append($('<option>').val('0').text('Choose parent category'));
+                    $("#u_parent_category_list").append($('<option>').val('0').text('Choose parent category'));
                 }else{
                     $("#u_parent_category_list").append($('<option>').val('0').text('Choose parent category'));
                     for(var key in res){
@@ -179,7 +181,6 @@ $(document).ready(function () {
                         $("#u_parent_category_list").append($('<option>').val(res[key].id).text(res[key].cate_name));
                     }
                 }
-
                 $("#cate_image_u").attr('src', result.image);
             });
         });
@@ -188,7 +189,7 @@ $(document).ready(function () {
     $(document).on('click', '#btn-update_category', function (e) {
         var url = '/admin/update_category/';
         var input = {
-            '_token'                : $("input[name=_token]").val(),
+            /*'_token'                : $("input[name=_token]").val(),*/
             'cate_id'               : $("#cate_id").val(),
             'cate_name'             : $("#u_cate_name").val(),
             'cate_description'      : $("#u_cate_description").val(),

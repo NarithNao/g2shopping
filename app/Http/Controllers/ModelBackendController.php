@@ -175,7 +175,7 @@ class ModelBackendController extends Controller
             'cate_description'      =>  $request->description,
             'cate_image'            =>  $request->cate_image,
             'parent_category'       =>  intval($request->parent_category),
-            'show_on_homepage'     =>  intval($request->show_on_homepage),
+            'show_on_homepage'      =>  intval($request->show_on_homepage),
             'include_on_main_menu'  =>  intval($request->include_on_main_menu),
             'position'              =>  intval($request->position),
         );
@@ -203,13 +203,8 @@ class ModelBackendController extends Controller
         ]);
     }
 
-    public function deleteCategory(Request $request, Category $category){
-        $cate = $category->find($request->d_cate_id);
-        //$cate->cate_image = $cate->cate_image==null?'':$cate->cate_image;
-        $image_path = 'images/category/'.$cate->cate_image;
-        Storage::disk('public1')->delete($image_path);
-        $cate->delete();
-        return back();
+    public function listCategoryUpdate(Request $request, Category $category){
+        return $category->where('id', '<>', $request->cate_id)->get();
     }
 
     public function updateCategory(Request $request, Category $category){

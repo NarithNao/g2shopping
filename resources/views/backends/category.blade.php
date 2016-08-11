@@ -5,17 +5,17 @@
 @endsection
 
 @section('content')
-    <input type="hidden" id="url" value="{{url('admin')}}">
+    {{-- conten header --}}
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4 col-xs-6">
                     <h3 class="text-info">Category</h3>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-8 col-xs-6">
                     <div style="margin-top: 15px;">
-                        <a href="#" class="btn btn-primary col-xs-5 col-xs-offset-1 pull-right" id="b-add_category">Add Category</a>
-                        <a href="#" class="btn btn-primary col-xs-5 col-xs-offset-1 pull-right hidden" id="b-cancel">Cancel</a>
+                        <a href="#" class="btn btn-primary col-xs-5 col-xs-offset-1 pull-right text-center" id="b-add_category" style="min-width: 140px; max-width: 200px;">Add Category</a>
+                        <a href="#" class="btn btn-primary col-xs-5 col-xs-offset-1 pull-right hidden" id="b-cancel" style="min-width: 100px; max-width: 150px;">Cancel</a>
                     </div>
 
                 </div>
@@ -23,6 +23,7 @@
             </div>
         </div>
     </div>
+    {{-- end conten header --}}
 
     {{-- list category --}}
     <div class="row" id="category">
@@ -121,7 +122,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <img id="cate_image_a" src="{{asset('images/profile/img.png')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
+                            <img id="cate_image_a" src="{{asset('images/no_image.gif')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
                             <input type="file" name="a_cate_image" id="a_cate_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
                         </div>
                     </div>

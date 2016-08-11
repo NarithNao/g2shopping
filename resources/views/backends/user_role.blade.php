@@ -40,57 +40,10 @@
                     <div class="table-responsive" style="padding: 20px 0;">
                         <table id="tb_user_role" class="table table-bordered table-condensed" style="min-width: 300px;">
                             <thead>
-                            {{--<tr>
-                                <th class="text-center">#</th>
-                                <th class="text-center">Role</th>
-                                <th class="text-center">status</th>
-                                <th class="text-center">Action</th>
-                            </tr>--}}
                             </thead>
                             <tbody>
-                            {{--@foreach ($user_role_datas as $data)
-                                <tr>
-                                    <td class="col-xs-2 col-sm-2 text-center">{{$i++}}</td>
-                                    <td class="col-xs-3 col-sm-4">{{$data->role}}</td>
-                                    <td class="col-xs-2 col-sm-2">
-                                        @if($data->status == 1)
-                                            <a href="#" class="btn btn-xs center-block" data-toggle="tooltip" title="Active">
-                                                <span class="glyphicon glyphicon-ok-circle"></span>
-                                            </a>
-                                        @else
-                                            <a href="#" class="btn btn-xs center-block" data-toggle="tooltip" title="Inactive">
-                                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                            </a>
-                                        @endif
-                                    </td>
-                                    <td class="col-xs-5 col-sm-4">
-                                        <a href="{{url($data->id)}}" class="btn btn-warning btn-xs col-xs-5 col-xs-offset-1 btn_update_user_role" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>
-                                        <a href="{{url($data->id)}}" class="btn btn-danger btn-xs col-xs-5 col-xs-offset-1 btn_delete_user_role" data-toggle="tooltip" title="Delete"><i class="fa fa-times"></i></a>
-                                    </td>
-                                </tr>
-                            @endforeach--}}
                             </tbody>
                         </table>
-                        {{--<table style="width: 100%;">
-                            <tr>
-                                --}}{{--<td class="col-sm-6 col-xs-8" style="min-width: 200px;">{{ $user_role_datas->render() }}</td>--}}{{--
-                                <td class="col-sm-6 col-xs-8" style="min-width: 100px;">
-                                    <form class="form-horizontal pull-right" role="form">
-                                        <div class="form-group">
-                                            <div class="col-sm-12 col-xs-12">
-                                                <label for="sel1">Set Page:</label>
-                                                <select class="form-control" id="pagination">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>--}}
                     </div>
                 </div>
                 {{-- end list user role --}}

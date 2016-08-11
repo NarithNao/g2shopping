@@ -50,25 +50,6 @@
                             <tbody>
                             </tbody>
                         </table>
-                        {{--<table style="width: 100%;">
-                            <tr>
-                                <td class="col-sm-6 col-xs-8" style="min-width: 100px;">
-                                    <form class="form-horizontal pull-right" role="form">
-                                        <div class="form-group">
-                                            <div class="col-sm-12 col-xs-12">
-                                                <label for="sel1">Set Page:</label>
-                                                <select class="form-control" id="pagination">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>--}}
                     </div>
                 </div>
                 {{-- end list user --}}

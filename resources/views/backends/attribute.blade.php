@@ -10,11 +10,11 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-sm-4 col-xs-6">
-                    <h3 class="text-info">Manufacturer</h3>
+                    <h3 class="text-info">Attribute</h3>
                 </div>
                 <div class="col-sm-8 col-xs-6">
                     <div style="margin-top: 15px;">
-                        <a href="#" class="btn btn-primary col-xs-5 col-xs-offset-1 pull-right text-center" id="b-add_brand" style="min-width: 140px; max-width: 200px;">Add Manufacturer</a>
+                        <a href="#" class="btn btn-primary col-xs-5 col-xs-offset-1 pull-right" id="b-add_attribute" style="min-width: 100px; max-width: 150px;">Add Attribute</a>
                         <a href="#" class="btn btn-primary col-xs-5 col-xs-offset-1 pull-right hidden" id="b-cancel" style="min-width: 100px; max-width: 150px;">Cancel</a>
                     </div>
 
@@ -25,7 +25,7 @@
     </div>
     {{-- end conten header --}}
 
-    {{-- list brand --}}
+    {{-- list attribute --}}
     <div class="row" id="brand">
         <div class="well">
             <div class="table-responsive" style="padding: 20px 0;">
@@ -41,7 +41,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($brands as $brand)
+                    {{--@foreach($brands as $brand)
                         <tr>
                             <td class="text-center">{{$i++}}</td>
                             <td class="text-center"><img src="{{asset('images/brand/'.$brand->brand_image)}}" class="img-rounded" alt="Category Image" style="max-height: 50px;"></td>
@@ -62,15 +62,15 @@
                                 <a href="{{url($brand->id)}}" class="btn btn-warning btn-xs col-xs-10 col-xs-offset-1 btn_update_brand" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>
                             </td>
                         </tr>
-                    @endforeach
+                    @endforeach--}}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    {{-- end list brand --}}
+    {{-- end list attribute --}}
 
-    {{-- add brand --}}
+    {{-- add attribute --}}
     <div class="row" id="l-add_brand" style="display: none;">
         <div class="well">
             <div class="page-header text-center text-info" style="margin-top: -20px;">
@@ -101,7 +101,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <img id="brand_image_a" src="{{asset('images/no_image.gif')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
+                            <img id="brand_image_a" src="{{asset('images/profile/img.png')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
                             <input type="file" name="a_brand_image" id="a_brand_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
                         </div>
                     </div>
@@ -114,9 +114,9 @@
             </form>
         </div>
     </div>
-    {{-- end add brand --}}
+    {{-- end add attribute --}}
 
-    {{-- update brand --}}
+    {{-- update attribute --}}
     <div class="row" id="l-update_brand" style="display: none;">
         <div class="well">
             <div class="page-header text-center text-info" style="margin-top: -20px;">
@@ -168,13 +168,12 @@
             </form>
         </div>
     </div>
-    {{-- end update brand --}}
+    {{-- end update attribute --}}
 
 @endsection
 
 @section('js')
-    <script src="{{asset('bootstrap/js/bootstrap-filestyle.min.js')}}"></script>
-    <script src="{{asset('backend/js/pages/brand.js')}}"></script>
+    <script src="{{asset('backend/js/pages/attribute.js')}}"></script>
     <script>
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip();

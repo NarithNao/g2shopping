@@ -18,6 +18,7 @@ $user = \App\User::find($user_session[0]['id']);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>G2Shopping Admin</title>
 
@@ -41,6 +42,7 @@ $user = \App\User::find($user_session[0]['id']);
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 
     @yield('css')
 
@@ -459,6 +461,14 @@ $user = \App\User::find($user_session[0]['id']);
 {{-- Custom own Javascript functions --}}
 <script src="{{asset('backend/js/g2shopping.utilities.js')}}"></script>
 <script src="{{asset('backend/js/g2shopping.plugin.js')}}"></script>
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
 
     @yield('js')
 

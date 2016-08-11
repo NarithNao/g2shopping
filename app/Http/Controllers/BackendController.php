@@ -58,6 +58,11 @@ class BackendController extends Controller
                 $brands = Brand::all();
                 $i = 1;
                 return view('backends/brand', compact('brands', 'i'));
+                break;
+            case 'attribute':
+
+                return view('backends/attribute', compact('attributes', 'i'));
+                break;
             case 'page-not-found':
                 return view('frontends/404');
                 break;
