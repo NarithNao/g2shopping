@@ -31,7 +31,7 @@ g2shopping.jsGetReq = function (url, callback) {
         type: 'Get',
         dataType: 'json',
         error: function(xhr, textStatus, errorThrown){
-            //console.log(xhr.statusText + ' '+textStatus+' '+errorThrown);
+            console.log(xhr.statusText + ' '+textStatus+' '+errorThrown);
         },
         success: function(result){
             try{
