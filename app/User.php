@@ -15,4 +15,8 @@ class User extends Model
     public function userType(){
         return $this->belongsTo(UserType::class, 'user_type_id');
     }
+
+    public function products(){
+        return $this->hasMany(Product::class, 'user_id');
+    }
 }
