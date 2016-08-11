@@ -20,6 +20,43 @@ Route::get('{url}', 'FrontendController@checkUrl');
 
 Route::group(['prefix' => 'admin'], function () {
 
+    /*
+     * AJAX request
+     */
+
+    /* user role */
+    Route::get('list_user_role', 'Backend\UserTypeCtrl@listUserRole');
+    Route::get('list_user_role_active', 'Backend\UserTypeCtrl@listUserRoleActive');
+    Route::post('add_user_role', 'Backend\UserTypeCtrl@addUserRole');
+    Route::get('user_role/{id}/search', 'Backend\UserTypeCtrl@searchUserRole');
+    Route::post('update_user_role', 'Backend\UserTypeCtrl@updateUserRole');
+
+    /* user */
+    Route::get('list_user', 'Backend\UserCtrl@listUser');
+    Route::post('add_user', 'Backend\UserCtrl@addUser');
+    Route::get('user/{id}/search', 'Backend\UserCtrl@searchUser');
+    Route::post('update_user', 'Backend\UserCtrl@updateUser');
+    Route::post('update_user_info', 'Backend\UserCtrl@updateUserInfo');
+
+    /* product */
+    Route::get('category/list', 'Backend\CategoryCtrl@listCategory');
+    Route::post('add_category', 'Backend\CategoryCtrl@addCategory');
+    Route::post('add_category_image', 'Backend\CategoryCtrl@addCategoryImage');
+    Route::get('category/{id}/search', 'Backend\CategoryCtrl@searchCategory');
+    Route::post('category/list_update', 'Backend\CategoryCtrl@listCategoryUpdate');
+    Route::post('update_category', 'Backend\CategoryCtrl@updateCategory');
+    Route::post('update_category_image', 'Backend\CategoryCtrl@updateCategoryImage');
+
+    /* brand */
+    Route::post('add_brand', 'Backend\BrandCtrl@addBrand');
+    Route::post('add_brand_image', 'Backend\BrandCtrl@addBrandImage');
+    Route::get('brand/{id}/search', 'Backend\BrandCtrl@searchBrand');
+    Route::post('update_brand', 'Backend\BrandCtrl@updateBrand');
+    Route::post('update_brand_image', 'Backend\BrandCtrl@updateBrandImage');
+
+    /*
+     * HTTP request
+     */
     Route::get('login', function () {
         $user_type = \App\UserType::all();
         $user = \App\User::all();
@@ -49,35 +86,6 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::post('login', 'ModelBackendController@doLogin');
-
-    Route::get('test', 'Backend\UserTypeCtrl@index');
-
-    Route::get('list_user_role', 'Backend\UserTypeCtrl@listUserRole');
-    Route::get('list_user_role_active', 'Backend\UserTypeCtrl@listUserRoleActive');
-    Route::post('add_user_role', 'Backend\UserTypeCtrl@addUserRole');
-    Route::get('user_role/{id}/search', 'Backend\UserTypeCtrl@searchUserRole');
-    Route::post('update_user_role', 'Backend\UserTypeCtrl@updateUserRole');
-    //Route::post('delete_user_role', 'ModelBackendController@deleteUserRole');
-
-    Route::get('list_user', 'Backend\UserCtrl@listUser');
-    Route::post('add_user', 'Backend\UserCtrl@addUser');
-    Route::get('user/{id}/search', 'Backend\UserCtrl@searchUser');
-    Route::post('update_user', 'Backend\UserCtrl@updateUser');
-    Route::post('update_user_info', 'Backend\UserCtrl@updateUserInfo');
-
-    Route::get('category/list', 'Backend\CategoryCtrl@listCategory');
-    Route::post('add_category', 'Backend\CategoryCtrl@addCategory');
-    Route::post('add_category_image', 'Backend\CategoryCtrl@addCategoryImage');
-    Route::get('category/{id}/search', 'Backend\CategoryCtrl@searchCategory');
-    Route::post('category/list_update', 'Backend\CategoryCtrl@listCategoryUpdate');
-    Route::post('update_category', 'Backend\CategoryCtrl@updateCategory');
-    Route::post('update_category_image', 'Backend\CategoryCtrl@updateCategoryImage');
-
-    Route::post('add_brand', 'Backend\BrandCtrl@addBrand');
-    Route::post('add_brand_image', 'Backend\BrandCtrl@addBrandImage');
-    Route::get('brand/{id}/search', 'Backend\BrandCtrl@searchBrand');
-    Route::post('update_brand', 'Backend\BrandCtrl@updateBrand');
-    Route::post('update_brand_image', 'Backend\BrandCtrl@updateBrandImage');
 
     Route::get('{url}', 'BackendController@checkUrl');
 
