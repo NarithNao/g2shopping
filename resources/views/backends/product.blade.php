@@ -26,7 +26,7 @@
     {{-- end conten header --}}
 
     {{-- list product --}}
-    <div class="row" id="category">
+    <div class="row" id="product">
         <div class="well">
             <div class="table-responsive" style="padding: 20px 0;">
                 <table class="table table-bordered">
@@ -71,27 +71,33 @@
     {{-- end list product --}}
 
     {{-- add product --}}
-    <div class="row" id="l-add_category" style="display: none;">
+    <div class="row" id="l-add_product" style="display: none;">
         <div class="well">
             <div class="page-header text-center text-info" style="margin-top: -20px;">
-                <h3>Add Category</h3>
+                <h3>Add Product</h3>
             </div>
-            <form class="form-horizontal" id="frm_upload_image" role="form" method="POST" action="{{url('admin/add_category_image')}}" enctype="multipart/form-data" style="padding: 20px 0;">
+            <form class="form-horizontal" id="frm_upload_image" role="form" method="POST" action="{{url('admin/add_product_image')}}" enctype="multipart/form-data" style="padding: 20px 0;">
                 {{ csrf_field() }}
                 <div class="col-sm-8">
                     <div class="form-group">
-                        <label class="col-sm-4 text-left" for="a_cate_name">Category name:</label>
+                        <label class="col-sm-4 text-left" for="a_pro_sku">Product code/SKU:</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="a_cate_name" name="a_cate_name" placeholder="Enter Category name">
+                            <input type="text" class="form-control" id="a_pro_sku" name="a_pro_sku" placeholder="Enter Product Code / SKU">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4 text-left" for="a_cate_description">Description:</label>
+                        <label class="col-sm-4 text-left" for="a_pro_short_description">Short Description:</label>
                         <div class="col-sm-8">
-                            <textarea class="form-control" rows="10" id="a_cate_description" name="a_cate_description" style="resize: vertical;"></textarea>
+                            <textarea class="form-control" rows="5" id="a_pro_short_description" name="a_pro_short_description" style="resize: vertical;" placeholder="Short Description"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-4 text-left" for="a_pro_full_description">Full Description:</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" rows="10" id="a_pro_full_description" name="a_pro_full_description" placeholder="Full Description" style="resize: vertical;"></textarea>
+                        </div>
+                    </div>
+                   {{-- <div class="form-group">
                         <label class="col-sm-4 col-xs-6 text-left" for="a_show_on_homepage">Show on Homepage:</label>
                         <div class="col-sm-8 col-xs-6">
                             <input type="checkbox" name="a_show_on_homepage" id="a_show_on_homepage">
@@ -102,19 +108,13 @@
                         <div class="col-sm-8 col-xs-6">
                             <input type="checkbox" name="a_include_on_main_menu" id="a_include_on_main_menu">
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <label class="text-left" for="a_position">Display Order:</label>
-                            <input type="text" class="form-control" id="a_position" name="a_position" placeholder="Enter Display order">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <label class="text-left" for="a_parent_category">Parent Category:</label>
-                            <select class="form-control" id="a_parent_category" name="a_parent_category">
+                            <label class="text-left" for="a_pro_category">Category:</label>
+                            <select class="form-control" id="a_pro_category" name="a_pro_category">
                                 {{--<option>1</option>
                                 <option>2</option>--}}
                             </select>
@@ -122,8 +122,35 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <img id="cate_image_a" src="{{asset('images/no_image.gif')}}" class="img-thumbnail" alt="Cinque Terre" width="200px">
-                            <input type="file" name="a_cate_image" id="a_cate_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
+                            <label class="text-left" for="a_pro_brand">Brand:</label>
+                            <select class="form-control" id="a_pro_brand" name="a_pro_brand">
+                                {{--<option>1</option>
+                                <option>2</option>--}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="text-left" for="a_pro_cost">Product Cost:</label>
+                            <input type="text" class="form-control" id="a_pro_cost" name="a_pro_cost" placeholder="Enter Product Cost">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="text-left" for="a_pro_price">Product Price:</label>
+                            <input type="text" class="form-control" id="a_pro_price" name="a_pro_price" placeholder="Enter Product Price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="text-left" for="a_pro_qty">Product Quantity:</label>
+                            <input type="text" class="form-control" id="a_pro_qty" name="a_pro_qty" placeholder="Enter Product Quantity">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="text-left" for="a_pro_qty_min">Product min-instock:</label>
+                            <input type="text" class="form-control" id="a_pro_qty_min" name="a_pro_qty_min" placeholder="Enter Product Minimum in Stock">
                         </div>
                     </div>
                 </div>
@@ -138,7 +165,7 @@
     {{-- end add product --}}
 
     {{-- update product --}}
-    <div class="row" id="l-update_category" style="display: none;">
+    {{--<div class="row" id="l-update_category" style="display: none;">
         <div class="well">
             <div class="page-header text-center text-info" style="margin-top: -20px;">
                 <h3>Update Category</h3>
@@ -210,7 +237,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div>--}}
     {{-- end update product --}}
 
 @endsection

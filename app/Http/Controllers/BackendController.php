@@ -23,9 +23,7 @@ class BackendController extends Controller
         switch($url){
             /* Administration menu */
             case 'user_role':
-                $user_role_datas = UserType::all();
-                $user_datas =  User::all();
-                return view('backends/user_role', compact('user_role_datas', 'user_datas'));
+                return view('backends/user_role');
                 break;
             case 'user':
                 return view('backends/user');
