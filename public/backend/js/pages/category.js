@@ -101,10 +101,10 @@ $(document).ready(function () {
         $("#category").show();
     });
 
-    $(document).on('click', '#u_parent_category', function(){
+    /*$(document).on('click', '#u_parent_category', function(){
         $('#u_parent_category').hasClass('hidden')?'':$('#u_parent_category').addClass('hidden');
         $('#u_parent_category_list').hasClass('hidden')?$('#u_parent_category_list').removeClass('hidden'):'';
-    });
+    });*/
 
     $(document).on('change', '#u_show_on_homepage', function (e) {
         if ($(this).prop("checked")) {
@@ -129,12 +129,9 @@ $(document).ready(function () {
 
     $(document).on('click', '#category table tbody tr td a.btn_update_category', function (e) {
         e.preventDefault();
-        $("#category").hide();
-        $("#b-add_category").hide();
-        $("#b-cancel").removeClass('hidden');
-        $("#l-update_category").show();
-        $("#u_cate_name").focus();
-
+        /*$('#u_parent_category').hasClass('hidden')?$('#u_parent_category').removeClass('hidden'):'';
+        $('#u_parent_category_list').hasClass('hidden')?'':$('#u_parent_category_list').addClass('hidden');*/
+        $("#u_parent_category").empty();
         var id = g2shopping.getLinkID(this.href);
         var url = 'category/'+id+'/search';
         g2shopping.jsGetReq(url, function (result) {
@@ -163,26 +160,40 @@ $(document).ready(function () {
                 $("#u_status").val('0');
             }
             $("#u_position").val(result.data.position);
-
+            $("#cate_image_u").attr('src', result.image);
             g2shopping.jsPostReq('/admin/category/list_update', {'cate_id': id}, function (res) {
-                $("#u_parent_category").empty();
-                $("#u_parent_category_list").empty();
-                if(res.length < 1){
+                //$("#u_parent_category").empty();
+               // $("#u_parent_category_list").empty();
+
+                for(var key in res){
+                    $("#u_parent_category").append($('<option>').val(res[key].id).text(res[key].cate_name));
+                }
+                $("#u_parent_category option[value="+parent_cate+"]").attr('selected', 'selected');
+                console.log(parent_cate);
+                /*if(res.length < 1){
                     $("#u_parent_category").append($('<option>').val('0').text('Choose parent category'));
                     $("#u_parent_category_list").append($('<option>').val('0').text('Choose parent category'));
                 }else{
                     $("#u_parent_category_list").append($('<option>').val('0').text('Choose parent category'));
                     for(var key in res){
-                        if(result.data.parent_category == res[key].id)
+                        /!*if(result.data.parent_category == res[key].id)
                             $("#u_parent_category").append($('<option>').val(res[key].id).text(res[key].cate_name)).prop('selected', true);
-                        else{
-                            $("#u_parent_category").append($('<option>').val('0').text('Choose parent category'));
-                        }
-                        $("#u_parent_category_list").append($('<option>').val(res[key].id).text(res[key].cate_name));
+                        else{*!/
+                            //$("#u_parent_category").append($('<option>').val('0').text('Choose parent category'));
+                        //}
+                        //$("#u_parent_category_list").append($('<option>').val(res[key].id).text(res[key].cate_name));
+                        $("#u_parent_category").append($('<option>').val(res[key].id).text(res[key].cate_name));
                     }
+                    //$("#u_parent_category option[value="+result.cate_id+"]").attr('selected', 'selected');
                 }
-                $("#cate_image_u").attr('src', result.image);
+                $("#u_parent_category option[value="+result.cate_id+"]").attr('selected', 'selected');*/
             });
+
+            $("#category").hide();
+            $("#b-add_category").hide();
+            $("#b-cancel").removeClass('hidden');
+            $("#l-update_category").show();
+            $("#u_cate_name").focus();
         });
     });
 

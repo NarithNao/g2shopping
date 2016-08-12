@@ -38,7 +38,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('update_user', 'Backend\UserCtrl@updateUser');
     Route::post('update_user_info', 'Backend\UserCtrl@updateUserInfo');
 
-    /* product */
+    /* category */
     Route::get('category/list', 'Backend\CategoryCtrl@listCategory');
     Route::post('add_category', 'Backend\CategoryCtrl@addCategory');
     Route::post('add_category_image', 'Backend\CategoryCtrl@addCategoryImage');
@@ -48,12 +48,17 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('update_category_image', 'Backend\CategoryCtrl@updateCategoryImage');
 
     /* brand */
+    Route::get('brand/list', 'Backend\BrandCtrl@listBrand');
     Route::post('add_brand', 'Backend\BrandCtrl@addBrand');
     Route::post('add_brand_image', 'Backend\BrandCtrl@addBrandImage');
     Route::get('brand/{id}/search', 'Backend\BrandCtrl@searchBrand');
     Route::post('update_brand', 'Backend\BrandCtrl@updateBrand');
     Route::post('update_brand_image', 'Backend\BrandCtrl@updateBrandImage');
 
+    /* product */
+    Route::get('product/list', 'Backend\ProductCtrl@listProduct');
+    Route::post('add_product', 'Backend\ProductCtrl@addProduct');
+    Route::get('product/{id}/search', 'Backend\ProductCtrl@searchProduct');
     /*
      * HTTP request
      */

@@ -34,21 +34,25 @@
                     <tr>
                         <th class="text-center col-xs-1">#</th>
                         <th class="text-center">Image</th>
-                        <th class="text-center">Name</th>
-                        <th class="text-center">Display Order</th>
+                        <th class="text-center">Pro. SKU</th>
+                        <th class="text-center">Cost</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Instock</th>
                         <th class="text-center col-xs-1">Status</th>
                         <th class="text-center" style="min-width: 70px;">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {{--@foreach($categories as $category)
+                    @foreach($products as $product)
                         <tr>
                             <td class="text-center">{{$i++}}</td>
-                            <td class="text-center"><img src="{{asset('images/category/'.$category->cate_image)}}" class="img-rounded" alt="Category Image" style="max-height: 50px;"></td>
-                            <td>{{$category->cate_name}}</td>
-                            <td class="text-center">{{$category->position}}</td>
+                            <td class="text-center">{{--<img src="{{asset('images/category/'.$category->cate_image)}}" class="img-rounded" alt="Category Image" style="max-height: 50px;">--}}</td>
+                            <td>{{$product->sku}}</td>
+                            <td>{{$product->cost}}</td>
+                            <td>{{$product->price}}</td>
+                            <td class="text-center">{{$product->instock}}</td>
                             <td>
-                                @if($category->status == 1)
+                                @if($product->status == 1)
                                     <a href="#" class="btn btn-xs center-block" data-toggle="tooltip" title="Active">
                                         <span class="glyphicon glyphicon-ok-circle"></span>
                                     </a>
@@ -59,10 +63,10 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{url($category->id)}}" class="btn btn-warning btn-xs col-xs-10 col-xs-offset-1 btn_update_category" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>
+                                <a href="{{url($product->id)}}" class="btn btn-warning btn-xs col-xs-10 col-xs-offset-1 btn_update_product" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>
                             </td>
                         </tr>
-                    @endforeach--}}
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -156,7 +160,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12 text-center">
-                        <a id="btn-add_category" class="btn btn-primary">Save</a>
+                        <a id="btn-add_product" class="btn btn-primary">Save</a>
                     </div>
                 </div>
             </form>
@@ -165,79 +169,97 @@
     {{-- end add product --}}
 
     {{-- update product --}}
-    {{--<div class="row" id="l-update_category" style="display: none;">
+    <div class="row" id="l-update_product" style="display: none;">
         <div class="well">
             <div class="page-header text-center text-info" style="margin-top: -20px;">
-                <h3>Update Category</h3>
+                <h3>Add Product</h3>
             </div>
-            <form class="form-horizontal" id="u_frm_upload_image" role="form" method="POST" action="{{url('admin/update_category_image')}}" enctype="multipart/form-data" style="padding: 20px 0;">
+            <form class="form-horizontal" id="frm_upload_image" role="form" method="POST" action="{{url('admin/update_product_image')}}" enctype="multipart/form-data" style="padding: 20px 0;">
                 {{ csrf_field() }}
-                <input type="hidden" id="cate_id">
                 <div class="col-sm-8">
                     <div class="form-group">
-                        <label class="col-sm-4 text-left" for="u_cate_name">Category name:</label>
+                        <label class="col-sm-4 text-left" for="u_pro_sku">Product code/SKU:</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="u_cate_name" name="u_cate_name" placeholder="Enter Category name">
+                            <input type="text" class="form-control" id="u_pro_sku" name="u_pro_sku" placeholder="Enter Product Code / SKU">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4 text-left" for="u_cate_description">Description:</label>
+                        <label class="col-sm-4 text-left" for="u_pro_short_description">Short Description:</label>
                         <div class="col-sm-8">
-                            <textarea class="form-control" rows="10" id="u_cate_description" name="u_cate_description" style="resize: vertical;"></textarea>
+                            <textarea class="form-control" rows="5" id="u_pro_short_description" name="u_pro_short_description" style="resize: vertical;" placeholder="Short Description"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4 col-xs-6 text-left" for="u_show_on_homepage">Show on Homepage:</label>
-                        <div class="col-sm-8 col-xs-6">
-                            <input type="checkbox" name="u_show_on_homepage" id="u_show_on_homepage">
+                        <label class="col-sm-4 text-left" for="u_pro_full_description">Full Description:</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" rows="10" id="u_pro_full_description" name="u_pro_full_description" placeholder="Full Description" style="resize: vertical;"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class=" col-sm-4 col-xs-6 text-left" for="u_include_on_main_menu">Include on main menu:</label>
-                        <div class="col-sm-8 col-xs-6">
-                            <input type="checkbox" name="u_include_on_main_menu" id="u_include_on_main_menu">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class=" col-sm-4 col-xs-6 text-left" for="u_status">Publish:</label>
-                        <div class="col-sm-8 col-xs-6">
-                            <input type="checkbox" name="u_status" id="u_status">
-                        </div>
-                    </div>
+                         <label class="col-sm-4 col-xs-6 text-left" for="u_pro_status">Publish:</label>
+                         <div class="col-sm-8 col-xs-6">
+                             <input type="checkbox" name="u_pro_status" id="u_pro_status">
+                         </div>
+                     </div>
+                    {{--  <div class="form-group">
+                         <label class=" col-sm-4 col-xs-6 text-left" for="a_include_on_main_menu">Include on main menu:</label>
+                         <div class="col-sm-8 col-xs-6">
+                             <input type="checkbox" name="a_include_on_main_menu" id="a_include_on_main_menu">
+                         </div>
+                     </div>--}}
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <label class="text-left" for="u_position">Display Order:</label>
-                            <input type="text" class="form-control" id="u_position" name="u_position" placeholder="Enter Display order">
+                            <label class="text-left" for="u_pro_category">Category:</label>
+                            <select class="form-control" id="u_pro_category" name="u_pro_category">
+                                {{--<option>1</option>
+                                <option>2</option>--}}
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <label class="text-left" for="u_parent_category">Parent Category:</label>
-                            <select class="form-control" id="u_parent_category" name="u_parent_category"></select>
-                        </div>
-                        <div class="col-sm-12">
-                            <select class="form-control hidden" id="u_parent_category_list" name="u_parent_category"></select>
+                            <label class="text-left" for="u_pro_brand">Brand:</label>
+                            <select class="form-control" id="u_pro_brand" name="u_pro_brand">
+                                {{--<option>1</option>
+                                <option>2</option>--}}
+                            </select>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <div class="col-sm-12" id="loading_image">
-                            <img id="cate_image_u" src="" class="img-thumbnail" alt="Cinque Terre" width="200px">
-                            <input type="file" name="u_cate_image" id="u_cate_image" class="filestyle" data-input="false" data-buttonText="Choose Image"><br>
+                        <div class="col-sm-12">
+                            <label class="text-left" for="u_pro_cost">Product Cost:</label>
+                            <input type="text" class="form-control" id="u_pro_cost" name="u_pro_cost" placeholder="Enter Product Cost">
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="text-left" for="u_pro_price">Product Price:</label>
+                            <input type="text" class="form-control" id="u_pro_price" name="u_pro_price" placeholder="Enter Product Price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="text-left" for="u_pro_qty">Product Quantity:</label>
+                            <input type="text" class="form-control" id="u_pro_qty" name="u_pro_qty" placeholder="Enter Product Quantity">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="text-left" for="u_pro_qty_min">Product min-instock:</label>
+                            <input type="text" class="form-control" id="u_pro_qty_min" name="u_pro_qty_min" placeholder="Enter Product Minimum in Stock">
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12 text-center">
-                        <a id="btn-update_category" class="btn btn-primary">Update</a>
+                        <a id="btn-update_product" class="btn btn-primary">Update</a>
                     </div>
                 </div>
             </form>
         </div>
-    </div>--}}
+    </div>
     {{-- end update product --}}
 
 @endsection

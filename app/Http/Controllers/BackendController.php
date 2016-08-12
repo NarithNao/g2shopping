@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Brand;
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 //use Illuminate\Support\Facades\Storage;
@@ -16,6 +17,7 @@ class BackendController extends Controller
             //print_r(Session::get('logged_in'));
             return redirect('admin/login');
         }
+        $i=1;
         switch($url){
             case 'profile':
                 return view('backends/profile');
@@ -40,16 +42,15 @@ class BackendController extends Controller
             case 'category':
                 $categories = Category::all();
                 //Storage::disk('public1')->delete('images/category/a1.jpg');
-                $i=1;
                 return view('backends/category', compact('categories', 'i'));
                 break;
             case 'manufacturer':
                 $brands = Brand::all();
-                $i = 1;
                 return view('backends/brand', compact('brands', 'i'));
                 break;
             case 'product':
-                return view('backends/product');
+                $products = Product::all();
+                return view('backends/product', compact('products', 'i'));
                 break;
             case 'attribute':
                 return view('backends/attribute');

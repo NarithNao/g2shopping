@@ -13,7 +13,7 @@ class FrontendController extends Controller
     public function checkUrl($url){
         switch($url){
             case 'index':
-                $cates = Category::where('status', 1)->where('include_on_main_menu', 1)->get();
+                $cates = Category::where('status', 1)->where('include_on_main_menu', 1)->where('parent_category', 0)->get();
                 return view('frontends/index', compact('cates'));
                 break;
             case 'checkout':

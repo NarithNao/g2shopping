@@ -108,67 +108,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li class="dropdown mega-dropdown active">
                                 <a class="color1" href="#" class="dropdown-toggle" data-toggle="dropdown">{{$cate->cate_name}}<span class="caret"></span></a>
 
-                                {{--<div class="dropdown-menu ">
+                                <div class="dropdown-menu" style="max-width: 350px;">
                                     <div class="menu-top">
                                         <div class="col1">
                                             <div class="h_nav">
-                                                <h4>Submenu1</h4>
+                                                {{--<h4>Submenu1</h4>--}}
                                                 <ul>
-                                                    <li><a href="{{url('product')}}">Accessories</a></li>
-                                                    <li><a href="{{url('product')}}">Bags</a></li>
-                                                    <li><a href="{{url('product')}}">Caps & Hats</a></li>
-                                                    <li><a href="{{url('product')}}">Hoodies & Sweatshirts</a></li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col1">
-                                            <div class="h_nav">
-                                                <h4>Submenu2</h4>
-                                                <ul>
-                                                    <li><a href="{{url('product')}}">Jackets & Coats</a></li>
-                                                    <li><a href="{{url('product')}}">Jeans</a></li>
-                                                    <li><a href="{{url('product')}}">Jewellery</a></li>
-                                                    <li><a href="{{url('product')}}">Jumpers & Cardigans</a></li>
-                                                    <li><a href="{{url('product')}}">Leather Jackets</a></li>
-                                                    <li><a href="{{url('product')}}">Long Sleeve T-Shirts</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col1">
-                                            <div class="h_nav">
-                                                <h4>Submenu3</h4>
-                                                <ul>
-                                                    <li><a href="{{url('product')}}">Shirts</a></li>
-                                                    <li><a href="{{url('product')}}">Shoes, Boots & Trainers</a></li>
-                                                    <li><a href="{{url('product')}}">Sunglasses</a></li>
-                                                    <li><a href="{{url('product')}}">Sweatpants</a></li>
-                                                    <li><a href="{{url('product')}}">Swimwear</a></li>
-                                                    <li><a href="{{url('product')}}">Trousers & Chinos</a></li>
-
-                                                </ul>
-
-                                            </div>
-                                        </div>
-                                        <div class="col1">
-                                            <div class="h_nav">
-                                                <h4>Submenu4</h4>
-                                                <ul>
-                                                    <li><a href="{{url('product')}}">T-Shirts</a></li>
-                                                    <li><a href="{{url('product')}}">Underwear & Socks</a></li>
-                                                    <li><a href="{{url('product')}}">Vests</a></li>
-                                                    <li><a href="{{url('product')}}">Jackets & Coats</a></li>
-                                                    <li><a href="{{url('product')}}">Jeans</a></li>
-                                                    <li><a href="{{url('product')}}">Jewellery</a></li>
+                                                    @foreach(App\Category::find($cate->id)->hasCategories as $subcate)
+                                                    <li><a href="{{url('category/'.$subcate->cate_name)}}">{{$subcate->cate_name}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="col1 col5">
-                                            <img src="{{asset('frontend/images/me.png')}}" class="img-responsive" alt="">
+                                            <img src="{{asset('images/category/'.$cate->cate_image)}}" class="img-responsive pull-right" alt="" style="max-height: 70px;">
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                </div>--}}
+                                </div>
 
                             </li>
                             @endforeach

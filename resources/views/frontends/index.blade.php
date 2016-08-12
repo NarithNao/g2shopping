@@ -53,45 +53,32 @@
 			</div>
 
 			<div class="col-md-6 col-md1">
+				@foreach($cates as $cate)
 				<div class="col-3">
-					<a href="{{url('details')}}"><img src="{{asset('frontend/images/pi1.jpg')}}" class="img-responsive" alt="">
+					<a href="{{url('details')}}"><img src="{{asset('images/category/'.$cate->cate_image)}}" class="img-responsive" alt="" style="width: 500px; height: 300px;">
 						<div class="col-pic">
 							<p>Lorem Ipsum</p>
 							<label></label>
-							<h5>For Men</h5>
+							<h5>For {{$cate->cate_name}}</h5>
 						</div>
 					</a>
 				</div>
-				<div class="col-3">
-					<a href="{{url('details')}}"><img src="{{asset('frontend/images/pi2.jpg')}}" class="img-responsive" alt="">
-						<div class="col-pic">
-							<p>Lorem Ipsum</p>
-							<label></label>
-							<h5>For Kids</h5>
-						</div>
-					</a>
-				</div>
-				<div class="col-3">
-					<a href="{{url('details')}}"><img src="{{asset('frontend/images/pi3.jpg')}}" class="img-responsive" alt="">
-						<div class="col-pic">
-							<p>Lorem Ipsum</p>
-							<label></label>
-							<h5>For Women</h5>
-						</div>
-					</a>
-				</div>
+				@endforeach
 			</div>
+
 			<div class="clearfix"></div>
 		</div>
 		<!--products-->
 		<div class="content-mid">
 			<h3>Trending Items</h3>
 			<label class="line"></label>
-			<div class="mid-popular">
-				<div class="col-md-3 item-grid simpleCart_shelfItem">
+
+			<div class="table-responsive">
+				@foreach($cates as $cate)
+				{{--<div class="col-md-3 item-grid simpleCart_shelfItem" style="padding-top: 20px;">
 					<div class=" mid-pop">
 						<div class="pro-img">
-							<img src="{{asset('frontend/images/pc.jpg')}}" class="img-responsive" alt="">
+							<img src="{{asset('images/category/'.$cate->cate_image)}}" class="img-responsive" alt="" style="max-height: 320px; min-height: 200px;">
 							<div class="zoom-icon ">
 								<a class="picture" href="{{asset('frontend/images/pc.jpg')}}" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
 							</div>
@@ -109,78 +96,50 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-3 item-grid simpleCart_shelfItem">
-					<div class=" mid-pop">
-						<div class="pro-img">
-							<img src="{{asset('frontend/images/pc1.jpg')}}" class="img-responsive" alt="">
-							<div class="zoom-icon ">
-								<a class="picture" href="{{asset('frontend/images/pc1.jpg')}}" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-								<a href="{{url('details')}}"><i class="glyphicon glyphicon-menu-right icon"></i></a>
-							</div>
+				</div>--}}
+				<div class="col-sm-3 col-xs-6" >
+					<div class="" style="border: 1px solid #888; margin: 20px 0px 0px 0;">
+						<div class="img-box" style="margin: 3px auto; width: 98%; border: 1px solid #ccc; min-height: 300px; text-align: center; vertical-align: middle;">
+							<img src="{{asset('images/category/'.$cate->cate_image)}}" class="" alt="" style="width: 100%; max-height: 300px; height: auto; display: block; margin:auto 0;">
 						</div>
-						<div class="mid-1">
-							<div class="women">
-								<div class="women-top">
-									<h6><a href="{{url('details')}}">At vero eos</a></h6>
-									<span><em class="item_price">$70.00</em></span>
+						<div class="pro_desc" style="margin: 10px auto; width: 98%; height: 60px; padding: 0 10px;">
+							<div class="pro_detail pull-left" style="width: 80%; ">
+								<div style="height: 50px;">
+									<p>{{$cate->cate_name}}</p>
+									<p>{{$cate->position}}</p>
 								</div>
-								<div class="img item_add">
-									<a href="#"><img src="{{asset('frontend/images/ca.png')}}" alt=""></a>
+							</div>
+							<div class="logo_buy pull-left" style="width: 20%;">
+								<div style="height: 50px;;">
+									<a href="#"><img src="{{asset('frontend/images/ca.png')}}" alt="" style="width: 100%; height: auto;"></a>
 								</div>
-								<div class="clearfix"></div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 item-grid simpleCart_shelfItem">
-					<div class=" mid-pop">
-						<div class="pro-img">
-							<img src="{{asset('frontend/images/pc2.jpg')}}" class="img-responsive" alt="">
-							<div class="zoom-icon ">
-								<a class="picture" href="{{asset('images/pc2.jpg')}}" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-								<a href="{{url('details')}}"><i class="glyphicon glyphicon-menu-right icon"></i></a>
+					<div class="col-sm-3 col-xs-6" >
+						<div class="" style="border: 1px solid #888; margin: 20px 0px 0px 0;">
+							<div class="img-box" style="margin: 3px auto; width: 98%; border: 1px solid #ccc; min-height: 300px; text-align: center; vertical-align: middle;">
+								<img src="{{asset('images/category/'.$cate->cate_image)}}" class="" alt="" style="width: 100%; max-height: 300px; height: auto; display: block; margin:auto 0;">
 							</div>
-						</div>
-						<div class="mid-1">
-							<div class="women">
-								<div class="women-top">
-									<h6><a href="{{url('details')}}">Sed ut perspiciati</a></h6>
-									<span><em class="item_price">$70.00</em></span>
+							<div class="pro_desc" style="margin: 10px auto; width: 98%; height: 60px; padding: 0 10px;">
+								<div class="pro_detail pull-left" style="width: 80%; ">
+									<div style="height: 50px;">
+										<p>{{$cate->cate_name}}</p>
+										<p>{{$cate->position}}</p>
+									</div>
 								</div>
-								<div class="img item_add">
-									<a href="#"><img src="{{asset('frontend/images/ca.png')}}" alt=""></a>
+								<div class="logo_buy pull-left" style="width: 20%;">
+									<div style="height: 50px;;">
+										<a href="#"><img src="{{asset('frontend/images/ca.png')}}" alt="" style="width: 100%; height: auto;"></a>
+									</div>
 								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 item-grid simpleCart_shelfItem">
-					<div class=" mid-pop">
-						<div class="pro-img">
-							<img src="{{asset('frontend/images/pc3.jpg')}}" class="img-responsive" alt="">
-							<div class="zoom-icon ">
-								<a class="picture" href="{{asset('frontend/images/pc3.jpg')}}" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-								<a href="{{url('details')}}"><i class="glyphicon glyphicon-menu-right icon"></i></a>
-							</div>
-						</div>
-						<div class="mid-1">
-							<div class="women">
-								<div class="women-top">
-									<h6><a href="{{url('details')}}">On the other</a></h6>
-									<span><em class="item_price">$70.00</em></span>
-								</div>
-								<div class="img item_add">
-									<a href="#"><img src="{{asset('frontend/images/ca.png')}}" alt=""></a>
-								</div>
-								<div class="clearfix"></div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="clearfix"></div>
+				@endforeach
 			</div>
+
 		</div>
 		<!--//products-->
 	</div>

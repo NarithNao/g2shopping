@@ -12,7 +12,7 @@ g2shopping.jsPostReq = function (url, input, callback) {
         data: input,
         dataType: 'json',
         error: function(xhr, textStatus, errorThrown){
-            alert(xhr.statusText);
+            alert(xhr.responseText);
         },
         success: function(result){
             try{

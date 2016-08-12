@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->double('cost');
             $table->double('price');
             $table->integer('instock');
-            $table->integer('instock_min');
+            $table->integer('instock_min')->dafault(0);
 
             $table->Integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

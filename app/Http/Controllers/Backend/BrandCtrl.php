@@ -9,6 +9,10 @@ use App\Brand;
 class BrandCtrl extends Controller
 {
 
+    public function listBrand(Brand $brand){
+        return $brand->all();
+    }
+
     public function addBrand(Request $request, Brand $brand){
         $data = array(
             'brand_name'             =>  $request->brand_name,
